@@ -1,0 +1,181 @@
+/*
+    gethifi.com - CSS Type Boilerplate
+    2010-11-12
+    v. 0.9
+    Author:Joel Sutherland (@JoelSutherland)
+    Liscenced under the MIT license
+
+    Type and Type Baseline
+    This stylesheet is designed to set up all text elements on a type baseline.
+    Using it ensures element coverage and ideally, clean type.
+   
+     Setup Instructions
+      *  ".content" is in front of all declarations.  This is so that it can
+         target only elements in a .content container.  Search/Replace to
+         change or eliminate.  It's probably best to eliminate so that you can
+         ensure this is used globally.
+      *  The default baseline is 20px.  Search/Replace 20px to adjust.
+      *  Once this is adjusted, it's also important to check the headers
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Enriqueta);
+
+/* Standard Text */
+#preview, #preview input, #preview button, #preview textarea {
+    font: normal 16px/28px "Open Sans",sans-serif;
+    color: #999;
+}
+
+
+/* Block Baselines */
+#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6,
+#preview p, #preview ul, #preview ol, #preview pre, #preview blockquote,
+#preview textarea, #preview button {
+    margin-bottom: 20px;
+}
+img { display: block; }
+
+
+
+/* Headers */
+#preview h1,#preview h2,#preview h3,#preview h4,#preview h5,#preview h6 {
+    text-rendering: optimizeLegibility; /* optional - helps kerning in some browsers */
+    font-family: "Enriqueta",serif;
+    font-weight: normal;
+    color: #fff;
+}
+#preview h1, #preview h1 a {
+    font-size: 30px;
+    line-height: 40px;
+}
+#preview h2 {
+    font-size: 24px;
+    line-height: 20px;
+}
+#preview h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+#preview h4 { 
+    font-size: 16px;
+    font-weight: bold;
+}
+#preview h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+#preview h6 {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+
+
+/* Paragraph Elements */
+#preview a:link {
+    color: #fff;
+    text-decoration: underline;
+}
+#preview a:active {
+    background: #fff;
+    text-decoration: underline;
+}
+#preview a:hover {
+    text-decoration: none;
+}
+#preview a:visited {
+    color: #fff;
+    text-decoration: underline;
+}
+#preview sup, #preview sub {
+    font-size: 80%;
+    line-height: 0;
+}
+#preview sup {
+    vertical-align: super;
+}
+#preview sub {
+    vertical-align: sub;
+}
+#preview code {
+    font-family: Consolas, "Courier New", Courier, mono;
+}
+
+
+
+/* Block Elements */
+#preview ul , #preview ol{
+    margin-left: 20px;
+}
+#preview blockquote {
+    display: block;
+    background: #eee;
+    background: rgba(0,0,0,.05);
+    border-left: 4px solid;
+    border-left-color: #ccc;
+    border-left-color:  rgba(0,0,0,.1);
+    padding: 10px;
+    font-style: italic;
+}
+    #preview blockquote p:last-child {
+        margin-bottom: 0;
+    }
+#preview pre {
+    font-family: Consolas, "Courier New", Courier, mono;
+    background: black;
+    background: rgba(0,0,0,.8);
+    color: #eee;
+    padding: 10px 20px;
+}
+
+
+
+/* Forms */
+#preview form { 
+}
+    #preview form p {
+        margin: 0;
+    }
+#preview label {
+    display: block;
+    margin-bottom: 0;
+}
+#preview input, #preview textarea, #preview select {
+    display: block;
+    margin: 4px 0 24px 0;
+}
+#preview input[type=text], #preview input[type=email], #preview input[type=url], #preview textarea {
+    width: 400px;
+    border: 1px solid;
+    border-color: #ccc;
+    border-color: rgba(0,0,0,.1);
+    height: 30px;
+    background: #fff;
+    background: rgba(255,255,255,.8);
+    font-size: 16px;
+    line-height: 30px;
+    padding: 0;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#preview textarea {
+    height: 150px; 
+    width: 450px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+#preview label.error {
+    width: 400px;
+    text-align: right;
+    color: #aa0000;
+}
+#preview label.error:before {
+   content: "▲ ";
+}
+#preview input.error, #preview textarea.error {
+    border-color: #aa0000;
+}

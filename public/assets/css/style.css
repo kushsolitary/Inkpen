@@ -1,0 +1,199 @@
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body, html {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+
+	font: normal 12px/18px Menlo, Consolas, "Courier New", monospace;
+}
+
+body.dark {
+	background: #151515;
+	color: #aaa;
+}
+
+body.light {
+	background: #ccc;
+	color: #444;
+}
+
+body {
+	transition: all .2s ease;
+}
+
+/*
+Write Area
+----------
+*/
+
+#write {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#text {
+	height: 100%;
+	width: 100%;
+	padding: 50px;
+	background: transparent;
+	font: normal 18px/25px Menlo, Consolas, "Courier New", monospace;
+	border: 0;
+	outline: 0;
+	color: inherit;
+	resize: none;
+	text-shadow: none;
+	transition: all .2s ease;
+}
+
+/*
+Notifications
+-------
+*/
+
+p.notify {
+	position: absolute;
+	top: 22px;
+	right: 60px;
+	display: none;
+}
+
+p.notify.success {
+	color: green;
+}
+
+p.notify.failure {
+	color: red;
+}
+
+/*
+Profile
+-------
+*/
+
+#profile {
+	position: absolute;
+	right: 8px; top: 8px;
+}
+
+#profile img {
+	opacity: 0.5;
+	border-radius: 3px;
+	background: #333;
+}
+
+#profile img:hover {
+	opacity: 1;
+}
+
+.light #profile img {background: #fff;}
+
+/* Text Styles */
+#preview {
+	overflow: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #ccc;
+	background: #222;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 10;
+	transition: all 0.2s ease;
+}
+
+#about {
+	width: 350px;
+	height: 100%;
+	background: #0e0e0e;
+	position: absolute;
+	left: -350px;
+	top: 0;
+	transition: all .2s ease;
+
+	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
+	overflow: auto;
+
+	padding: 25px 25px 25px 75px;
+	text-shadow : 0 1px 1px black;
+}
+
+#toggle {display: none;}
+#toggle:checked ~ .toggle{
+	left: 300px;
+	background: #000;
+}
+
+.toggle:hover {	background: #000; }
+.light .toggle:hover {	background: #aaa; }
+
+#toggle:checked ~ #about{ left: -50px; }
+#toggle:checked ~ #write > #text{ padding-left: 350px; }
+
+.toggle {
+	position: absolute;
+	left: 0px;
+	top: 0;
+	width: 40px;
+	height: 36px;
+	z-index: 5;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+.toggle:before {
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 3px;
+	background: #555;
+	bottom: 10px;
+	left: 7px;
+	box-shadow: 0 -6px #555, 0 -12px #555;
+}
+
+.light .toggle:before {
+	background: #fff;
+	box-shadow: 0 -6px #fff, 0 -12px #fff;
+}
+
+.logo {
+	width: 178px;
+	height: 84px;
+	background: url(../img/logo.png) no-repeat;
+	margin: 0px auto 40px;
+}
+
+#about h3 {
+	font: normal 12px/30px "Open Sans";
+	color: #68934c;
+	text-transform: uppercase;
+	margin: 10px 0px;
+	border-bottom: 1px dashed #222;
+}
+
+#about p {
+	color: #444;
+	margin: 10px 0px 25px;
+}
+
+#about a {
+	color: #999;
+	text-decoration: none;
+}
+
+#about ul {
+	list-style: none;
+}

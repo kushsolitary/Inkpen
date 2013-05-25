@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Distraction Free Writing</title>
+	<meta name="title" content="Distraction Free Writing" />
+	<meta name="description" content="I created this small application for you, if you like to write." />
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/typography.css">
+</head>
+<body>
+
+	<!-- Audio -->
+	<audio id="one" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+	<audio id="two" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+	<audio id="three" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+	<audio id="four" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+	<audio id="five" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+	<audio id="six" preload="true" >
+		<source src="sfx/1.mp3" type="audio/mpeg">
+		<source src="sfx/1.wav" type="audio/wav">
+	</audio>
+
+	<audio id="enter1" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+	<audio id="enter2" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+	<audio id="enter3" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+	<audio id="enter4" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+	<audio id="enter5" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+	<audio id="enter6" preload="true" >
+		<source src="sfx/enter.mp3" type="audio/mpeg">
+		<source src="sfx/enter.wav" type="audio/wav">
+	</audio>
+
+	<!-- Settings/Info -->
+	<input type="checkbox" id="toggle" name="toggle">
+	<label for="toggle" class="toggle"></label>
+	<div id="about">
+		<div class="logo"></div>
+		<h3>About</h3>
+		<p>
+			Hi! I am <a href="http://twitter.com/SolitaryDesigns">Kushagra Agarwal</a> and I created this small web app for you,
+			if you like to write without any distractions. I've also worked upon
+			<a href="http://cssdeck.com">CSSDeck</a> and <a href="http://khele.in">Khele.in</a>. 
+			<br />You can visit my <a href="http://solitarydesigns.net">portfolio</a> or <a href="http://codetheory.in">blog</a> to see other
+			cool things created by me.
+		</p>
+
+		<p>
+			Your written things are saved after every 2 seconds. It also supports markdown, CTRL+M.
+		</p>
+
+		<h3>Preferences</h3>
+		<p>
+			<a id="muteBtn" href="#">sounds</a>: <span id="muteVal">yes</span><br />
+			<a id="fsBtn" href="#">fullscreen</a>: <span id="fsVal">no</span><br />
+			Fullscreen may not work sometimes.
+		</p>
+		<p>There are around <a id="wordCount">0 words</a> in your current document.</p>
+	</div>
+
+
+	<!-- Heart -->
+	<textarea placeholder="Start writing here." name="body" id="text"></textarea>
+
+	<!-- Preview -->
+	<div id="preview"></div>
+
+	<!-- Scripts -->
+	<script src="js/Markdown.Converter.js" type="text/javascript"></script>
+	<script src="js/script.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-28350469-1']);
+	  _gaq.push(['_setDomainName', 'solitarydesigns.net']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</body>
+</html>
