@@ -3,8 +3,8 @@
 
 $app = new \Slim\Slim();
 
-$app->get('/', function() {
-  // $app->render('home.php');
+$app->get('/', function() use ($app) {
+  $app->render('home.php');
 });
 
 $app->run();
