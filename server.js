@@ -2,8 +2,7 @@
 var express = require('express')
   // Main App
   , app = express()
-  , RedisStore = require('connect-redis')(express)
-  , config = require('./config');
+  , RedisStore = require('connect-redis')(express);
 
 // Assets Path
 app.use(express.static(__dirname + '/public/assets'));
@@ -24,6 +23,33 @@ app.use(express.logger('dev'));
 var port = process.env.PORT || 8080;
 app.listen(port);
 
+// Utils
+function twoDigits(d) {
+  if(0 <= d && d < 10) return "0" + d.toString();
+  if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+  return d.toString();
+}
+
+Date.prototype.toMysqlFormat = function() {
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
+
+// DB
+var mysql = require("mysql-native");
+function createConnection() {
+  var db = mysql.createTCPClient();
+  db.set('auto_prepare', true)
+    .set('row_as_hash', false)
+    .auth('inkpen', 'root', '');
+
+  return db;
+}
+
+// Create tables
+var db = createConnection();
+db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), is_pro VARCHAR(10), created_at DATETIME)");
+db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content LONGTEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
+db.close();
 
 // Redis
 
@@ -33,7 +59,7 @@ var redis = require("redis").createClient();
 
 app.use(
   express.session({
-      secret: config.app_secret
+      secret: "lolzima"
     , store: new RedisStore({client: redis})
   })
 );
@@ -80,37 +106,45 @@ app.get('/favicon.ico', function(req, res) {
 
 // Get Writeup
 
-app.get('/w/:key', function(req, res) {
+app.get('/view/:key', function(req, res) {
   var key = req.params.key;
+  var data = {};
+  db = createConnection();
 
-  redis.hget('writeup:'+key, 'content', function(err, reply) {
-    var data = {key: key, content: reply};
+  db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
+    data.key = key;
+    data.content = r.result.rows[0];
     res.render('home', data);
+
+    console.log(r.result.rows[0]);
   });
 
-  //console.log(key);
+
+  db.close();
+
 });
 
 // Save Writeup
 
 app.post('/write/save', function(req, res) {
-  // Storing in Redis Hashes
-
-  // SADD writeup:key:*
-  // HSET writeup:_key_ content '...'
-  // HSET writeup:_key_ created_at '...'
-
   var key = generateId();
   var content = req.body.content
-    , created_at = Date.now()
+    , created_at = new Date().toMysqlFormat()
     , created_by = app.locals.username;
 
-  redis.sadd('writeup:key', key);
-  redis.hset('writeup:'+key, 'content', content);
-  redis.hset('writeup:'+key, 'created_at', created_at);
-  redis.hset('writeup:'+key, 'created_by', created_by);
+  db = createConnection();
 
-  res.json({key: key});
+  var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + created_by + "', '" + created_at + "')";
+  console.log(sql);
+
+  db.query(sql).on('end', function(r) {
+    console.log(r.result);
+    res.json({key: key});  
+  });
+
+  db.close();
+
+
 });
 
 // Update Writeup
@@ -118,37 +152,42 @@ app.post('/write/save', function(req, res) {
 app.post('/write/update', function(req, res) {
   var key = req.body.key;
   var content = req.body.content
-    , modified_at = Date.now()
+    , modified_at = new Date().toMysqlFormat()
     , curr_user = app.locals.username
     , created_by;
 
-  // Create a new key if the current user is different than the author
-  redis.hget('writeup:'+key, 'created_by', function(err, reply) {
-    created_by = reply;
+  db = createConnection();
+
+  db.query("SELECT created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
+    created_by = r.result.rows[0];
+
+    db = createConnection();
 
     if(created_by == curr_user) {
       console.log("Same Users");
 
-      // redis.sadd('writeup:key', key);
-      redis.hset('writeup:'+key, 'content', content);
-      redis.hset('writeup:'+key, 'modified_at', modified_at);
-
-      res.json({status: 'success'});
-    } 
+      db.query("UPDATE writes SET content = '" + content + "' WHERE slug = '" + key + "'").on('end', function(r) {
+        res.json({status: 'success'});
+      });
+    }
 
     else {
       console.log("Different Users");
-      
       key = generateId();
+      content = req.body.content;
+      
+      var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "')";
+      console.log(sql);
 
-      redis.sadd('writeup:key', key);
-      redis.hset('writeup:'+key, 'content', content);
-      redis.hset('writeup:'+key, 'created_at', modified_at);
-      redis.hset('writeup:'+key, 'created_by', curr_user);
-
-      res.json({key: key});
+      db.query(sql).on('end', function(r) {
+        console.log(r.result);
+        res.json({key: key});  
+      });
     }
   });
+
+
+  db.close();
   
 });
 
@@ -160,8 +199,8 @@ var OAuth = require('oauth').OAuth
   , oauth = new OAuth(
       "https://api.twitter.com/oauth/request_token",
       "https://api.twitter.com/oauth/access_token",
-      config.twitter_consumer_key,
-      config.twitter_consumer_secret,
+      "3H9mJB3pfIgrnu4v6WKWg",
+      "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
       "1.1A",
       "http://localhost:8080/auth/twitter/callback",
       "HMAC-SHA1"
@@ -171,7 +210,7 @@ app.get('/auth/twitter', function(req, res) {
 
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results) {
     if (error) {
-      console.log(error);
+      console.log(error, config.twitter_consumer_secret);
       res.send("Authentication Failed!");
     }
     else {

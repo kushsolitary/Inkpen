@@ -1,0 +1,174 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@1.2.18
+3 info using node@v0.10.5
+4 verbose read json C:\wamp\www\inkpen\package.json
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ 'C:\\wamp\\www\\inkpen',
+6 verbose install   [ 'express',
+6 verbose install     'jade',
+6 verbose install     'redis',
+6 verbose install     'hiredis',
+6 verbose install     'oauth',
+6 verbose install     'connect-redis',
+6 verbose install     'node-mysql',
+6 verbose install     'mysql@2.0.0-alpha8' ] ]
+7 verbose from cache C:\wamp\www\inkpen\package.json
+8 info preinstall thewriter@0.1.0
+9 verbose read json C:\wamp\www\inkpen\node_modules\connect-redis\package.json
+10 verbose read json C:\wamp\www\inkpen\node_modules\express\package.json
+11 verbose read json C:\wamp\www\inkpen\node_modules\jade\package.json
+12 verbose read json C:\wamp\www\inkpen\node_modules\mysql-native\package.json
+13 verbose read json C:\wamp\www\inkpen\node_modules\oauth\package.json
+14 verbose read json C:\wamp\www\inkpen\node_modules\redis\package.json
+15 verbose from cache C:\wamp\www\inkpen\package.json
+16 verbose readDependencies using package.json deps
+17 verbose from cache C:\wamp\www\inkpen\node_modules\connect-redis\package.json
+18 verbose from cache C:\wamp\www\inkpen\node_modules\express\package.json
+19 verbose from cache C:\wamp\www\inkpen\node_modules\jade\package.json
+20 verbose from cache C:\wamp\www\inkpen\node_modules\mysql-native\package.json
+21 verbose from cache C:\wamp\www\inkpen\node_modules\oauth\package.json
+22 verbose from cache C:\wamp\www\inkpen\node_modules\redis\package.json
+23 verbose already installed skipping jade@~0.27.7 C:\wamp\www\inkpen
+24 verbose already installed skipping redis@~0.8.2 C:\wamp\www\inkpen
+25 verbose cache add [ 'hiredis@~0.1.14', null ]
+26 verbose cache add name=undefined spec="hiredis@~0.1.14" args=["hiredis@~0.1.14",null]
+27 verbose parsed url { protocol: null,
+27 verbose parsed url   slashes: null,
+27 verbose parsed url   auth: null,
+27 verbose parsed url   host: null,
+27 verbose parsed url   port: null,
+27 verbose parsed url   hostname: null,
+27 verbose parsed url   hash: null,
+27 verbose parsed url   search: null,
+27 verbose parsed url   query: null,
+27 verbose parsed url   pathname: 'hiredis@~0.1.14',
+27 verbose parsed url   path: 'hiredis@~0.1.14',
+27 verbose parsed url   href: 'hiredis@~0.1.14' }
+28 verbose cache add name="hiredis" spec="~0.1.14" args=["hiredis","~0.1.14"]
+29 verbose parsed url { protocol: null,
+29 verbose parsed url   slashes: null,
+29 verbose parsed url   auth: null,
+29 verbose parsed url   host: null,
+29 verbose parsed url   port: null,
+29 verbose parsed url   hostname: null,
+29 verbose parsed url   hash: null,
+29 verbose parsed url   search: null,
+29 verbose parsed url   query: null,
+29 verbose parsed url   pathname: '~0.1.14',
+29 verbose parsed url   path: '~0.1.14',
+29 verbose parsed url   href: '~0.1.14' }
+30 verbose addNamed [ 'hiredis', '~0.1.14' ]
+31 verbose addNamed [ null, '>=0.1.14- <0.2.0-' ]
+32 verbose already installed skipping oauth@~0.9.8 C:\wamp\www\inkpen
+33 verbose already installed skipping connect-redis@~1.4.5 C:\wamp\www\inkpen
+34 verbose cache add [ 'node-mysql@*', null ]
+35 verbose cache add name=undefined spec="node-mysql@*" args=["node-mysql@*",null]
+36 verbose parsed url { protocol: null,
+36 verbose parsed url   slashes: null,
+36 verbose parsed url   auth: null,
+36 verbose parsed url   host: null,
+36 verbose parsed url   port: null,
+36 verbose parsed url   hostname: null,
+36 verbose parsed url   hash: null,
+36 verbose parsed url   search: null,
+36 verbose parsed url   query: null,
+36 verbose parsed url   pathname: 'node-mysql@*',
+36 verbose parsed url   path: 'node-mysql@*',
+36 verbose parsed url   href: 'node-mysql@*' }
+37 verbose cache add name="node-mysql" spec="*" args=["node-mysql","*"]
+38 verbose parsed url { protocol: null,
+38 verbose parsed url   slashes: null,
+38 verbose parsed url   auth: null,
+38 verbose parsed url   host: null,
+38 verbose parsed url   port: null,
+38 verbose parsed url   hostname: null,
+38 verbose parsed url   hash: null,
+38 verbose parsed url   search: null,
+38 verbose parsed url   query: null,
+38 verbose parsed url   pathname: '*',
+38 verbose parsed url   path: '*',
+38 verbose parsed url   href: '*' }
+39 verbose addNamed [ 'node-mysql', '*' ]
+40 verbose addNamed [ null, '' ]
+41 verbose cache add [ 'mysql@2.0.0-alpha8@*', null ]
+42 verbose cache add name=undefined spec="mysql@2.0.0-alpha8@*" args=["mysql@2.0.0-alpha8@*",null]
+43 verbose parsed url { protocol: null,
+43 verbose parsed url   slashes: null,
+43 verbose parsed url   auth: null,
+43 verbose parsed url   host: null,
+43 verbose parsed url   port: null,
+43 verbose parsed url   hostname: null,
+43 verbose parsed url   hash: null,
+43 verbose parsed url   search: null,
+43 verbose parsed url   query: null,
+43 verbose parsed url   pathname: 'mysql@2.0.0-alpha8@*',
+43 verbose parsed url   path: 'mysql@2.0.0-alpha8@*',
+43 verbose parsed url   href: 'mysql@2.0.0-alpha8@*' }
+44 verbose cache add name="mysql" spec="2.0.0-alpha8@*" args=["mysql","2.0.0-alpha8@*"]
+45 verbose parsed url { protocol: null,
+45 verbose parsed url   slashes: null,
+45 verbose parsed url   auth: null,
+45 verbose parsed url   host: null,
+45 verbose parsed url   port: null,
+45 verbose parsed url   hostname: null,
+45 verbose parsed url   hash: null,
+45 verbose parsed url   search: null,
+45 verbose parsed url   query: null,
+45 verbose parsed url   pathname: '2.0.0-alpha8@*',
+45 verbose parsed url   path: '2.0.0-alpha8@*',
+45 verbose parsed url   href: '2.0.0-alpha8@*' }
+46 verbose addNamed [ 'mysql', '2.0.0-alpha8@*' ]
+47 verbose addNamed [ null, null ]
+48 verbose already installed skipping express@~3.0.6 C:\wamp\www\inkpen
+49 silly lockFile 2eb82256-hiredis-0-1-14 hiredis@~0.1.14
+50 verbose lock hiredis@~0.1.14 C:\Users\Kushagra\AppData\Roaming\npm-cache\2eb82256-hiredis-0-1-14.lock
+51 silly lockFile 252ff967-node-mysql node-mysql@*
+52 verbose lock node-mysql@* C:\Users\Kushagra\AppData\Roaming\npm-cache\252ff967-node-mysql.lock
+53 silly lockFile b0aff132-mysql-2-0-0-alpha8 mysql@2.0.0-alpha8@*
+54 verbose lock mysql@2.0.0-alpha8@* C:\Users\Kushagra\AppData\Roaming\npm-cache\b0aff132-mysql-2-0-0-alpha8.lock
+55 silly addNameRange { name: 'hiredis', range: '>=0.1.14- <0.2.0-', hasData: false }
+56 silly addNameRange { name: 'node-mysql', range: '', hasData: false }
+57 info addNameTag [ 'mysql', '2.0.0-alpha8@*' ]
+58 verbose url raw node-mysql
+59 verbose url resolving [ 'https://registry.npmjs.org/', './node-mysql' ]
+60 verbose url resolved https://registry.npmjs.org/node-mysql
+61 info trying registry request attempt 1 at 23:21:15
+62 http GET https://registry.npmjs.org/node-mysql
+63 verbose url raw hiredis
+64 verbose url resolving [ 'https://registry.npmjs.org/', './hiredis' ]
+65 verbose url resolved https://registry.npmjs.org/hiredis
+66 info trying registry request attempt 1 at 23:21:15
+67 verbose etag "5DUTB10MJSI7RL02V9KA1CZKG"
+68 http GET https://registry.npmjs.org/hiredis
+69 verbose url raw mysql
+70 verbose url resolving [ 'https://registry.npmjs.org/', './mysql' ]
+71 verbose url resolved https://registry.npmjs.org/mysql
+72 info trying registry request attempt 1 at 23:21:16
+73 verbose etag "2MHWXBF8PX5SC696XJZM1IOAC"
+74 http GET https://registry.npmjs.org/mysql
+75 http 404 https://registry.npmjs.org/node-mysql
+76 silly registry.get cb [ 404,
+76 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+76 silly registry.get     date: 'Sat, 25 May 2013 17:51:19 GMT',
+76 silly registry.get     'content-type': 'application/json',
+76 silly registry.get     'content-length': '52',
+76 silly registry.get     'cache-control': 'must-revalidate' } ]
+77 silly lockFile 252ff967-node-mysql node-mysql@*
+78 silly lockFile 252ff967-node-mysql node-mysql@*
+79 error 404 'node-mysql' is not in the npm registry.
+79 error 404 You should bug the author to publish it
+79 error 404
+79 error 404 Maybe try 'npm search mysql'
+79 error 404
+79 error 404 Note that you can also install from a
+79 error 404 tarball, folder, or http url, or git url.
+80 error System Windows_NT 6.2.9200
+81 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+82 error cwd C:\wamp\www\inkpen
+83 error node -v v0.10.5
+84 error npm -v 1.2.18
+85 error code E404
+86 verbose exit [ 1, true ]

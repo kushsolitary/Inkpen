@@ -126,31 +126,6 @@ function init() {
 
   	}, false);
 
-	document.addEventListener("keydown", function(e) {
-		// Markdown!
-		keyCode = e.keyCode || e.which;
-
-		if((e.ctrlKey || e.metaKey) && keyCode == 77) {
-			if(!isPreviewActive) {
-				preview.innerHTML  = converter.makeHtml(textarea.value);
-				preview.style.opacity = 1;
-				preview.style.visibility = "visible";
-
-				isPreviewActive = true;
-				textarea.blur();
-			}
-			else {
-				preview.style.opacity = 0;
-				preview.style.visibility = "hidden";
-
-				isPreviewActive = false;
-				textarea.focus();
-			}
-
-			e.preventDefault();
-		}
-	}, false);
-
 	// Saving after every 2 seconds
 	try {
 		if(localStorage.getItem("firstTime") == "false")
@@ -296,6 +271,60 @@ function init() {
     } 
 	}
 
+	// Key bindings
+	document.addEventListener("keydown", function(e) {
+		keyCode = e.keyCode || e.which;
+
+		if((e.ctrlKey || e.metaKey) && keyCode == 77) {
+			if(!isPreviewActive) {
+				preview.innerHTML  = converter.makeHtml(textarea.value);
+				preview.style.opacity = 1;
+				preview.style.visibility = "visible";
+
+				isPreviewActive = true;
+				textarea.blur();
+			}
+			else {
+				preview.style.opacity = 0;
+				preview.style.visibility = "hidden";
+
+				isPreviewActive = false;
+				textarea.focus();
+			}
+			e.preventDefault();
+		}
+
+		if((e.ctrlKey || e.metaKey) && keyCode == 83) {
+			var content = $('#text').val()
+				, url = '/write/save';
+
+			if (window.key) {
+				// Update
+				key = window.key;
+				url = '/write/update';
+				// console.log(window.key);
+			}
+
+			$.post(
+				url,
+				{content: content, "key": key},
+				function(data) {
+					if (data.key) {
+						location.href = '/view/'+data.key;
+					}
+					notify('Updated successfully.', 'success');
+				},
+				'json'
+			).fail(function() {
+				notify('An error occured while updating.', 'failure');
+			});
+			e.preventDefault();
+
+		}
+
+
+	}, false);
+
 }
 
 function notify(text, status) {
@@ -306,31 +335,3 @@ function notify(text, status) {
 
 	ele.fadeIn(400).delay(2000).fadeOut(400);
 }
-
-keyz.key_bindings['ctrl+s', 'meta+s'] = function() {
-	var content = $('#text').val()
-		, url = '/write/save';
-
-	if (window.key) {
-		// Update
-		key = window.key;
-		url = '/write/update';
-		// console.log(window.key);
-	}
-
-	$.post(
-		url,
-		{content: content, "key": key},
-		function(data) {
-			if (data.key) {
-				location.href = '/w/'+data.key;
-			}
-			notify('Updated successfully.', 'success');
-		},
-		'json'
-	).fail(function() {
-		notify('An error occured while updating.', 'failure');
-	});
-
-	return false;
-};

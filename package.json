@@ -8,7 +8,8 @@
     "redis": "~0.8.2",
     "hiredis": "~0.1.14",
     "oauth": "~0.9.8",
-    "connect-redis": "~1.4.5"
+    "connect-redis": "~1.4.5",
+    "mysql-native": "*"
   },
   "engines": {
     "node": "0.8.x",
