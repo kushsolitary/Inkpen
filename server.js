@@ -54,7 +54,7 @@ function createConnection() {
 // Create tables
 var db = createConnection();
 db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), is_pro VARCHAR(10), created_at DATETIME)");
-db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content LONGTEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
+db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
 db.close();
 
 
@@ -224,18 +224,21 @@ app.post('/write/update', function(req, res) {
 // Twitter oAuth
 // -----
 
-var OAuth = require('oauth').OAuth
-  , oauth = new OAuth(
-      "https://api.twitter.com/oauth/request_token",
-      "https://api.twitter.com/oauth/access_token",
-      "3H9mJB3pfIgrnu4v6WKWg",
-      "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
-      "1.1A",
-      "http://localhost:8080/auth/twitter/callback",
-      "HMAC-SHA1"
-    );
+var OAuth = require('oauth').OAuth;
+var oauth;
+
 
 app.get('/auth/twitter', function(req, res) {
+  var host = req.headers.host;
+  oauth = new OAuth(
+    "https://api.twitter.com/oauth/request_token",
+    "https://api.twitter.com/oauth/access_token",
+    "3H9mJB3pfIgrnu4v6WKWg",
+    "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
+    "1.1A",
+    "http://" + host + "/auth/twitter/callback",
+    "HMAC-SHA1"
+  );
 
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results) {
     if (error) {
