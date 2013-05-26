@@ -4,7 +4,8 @@ function init() {
 	var i = 0,
 		k = 0,
 		textarea = document.getElementById("text"),
-		preview = document.getElementById("preview"),
+		preview = document.querySelector("#preview"),
+		post = document.querySelector("#preview .post")
 		converter = new Markdown.Converter(),
 		isPreviewActive = false,
 		words = [],
@@ -277,7 +278,7 @@ function init() {
 
 		if((e.ctrlKey || e.metaKey) && keyCode == 77) {
 			if(!isPreviewActive) {
-				preview.innerHTML  = converter.makeHtml(textarea.value);
+				post.innerHTML  = converter.makeHtml(textarea.value);
 				preview.style.opacity = 1;
 				preview.style.visibility = "visible";
 

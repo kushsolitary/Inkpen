@@ -17,12 +17,9 @@
       *  The default baseline is 20px.  Search/Replace 20px to adjust.
       *  Once this is adjusted, it's also important to check the headers
 */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-@import url(http://fonts.googleapis.com/css?family=Enriqueta);
-
 /* Standard Text */
 #preview, #preview input, #preview button, #preview textarea {
-    font: normal 16px/28px "Open Sans",sans-serif;
+    font: normal 16px/28px "Aleo",sans-serif;
     color: #999;
 }
 
@@ -40,13 +37,16 @@ img { display: block; }
 /* Headers */
 #preview h1,#preview h2,#preview h3,#preview h4,#preview h5,#preview h6 {
     text-rendering: optimizeLegibility; /* optional - helps kerning in some browsers */
-    font-family: "Enriqueta",serif;
+    font-family: "Aleo",serif;
     font-weight: normal;
-    color: #fff;
+    color: #333332;
 }
 #preview h1, #preview h1 a {
-    font-size: 30px;
-    line-height: 40px;
+    margin-top: 50px;
+    font-size: 60px;
+    color: #774553;
+    line-height: 1.5em;
+    font-weight: 900;
 }
 #preview h2 {
     font-size: 24px;
@@ -74,6 +74,11 @@ img { display: block; }
 
 
 /* Paragraph Elements */
+#preview p {
+    font: normal 22px/1.45 "Aleo",sans-serif;
+    color: #333332;
+}
+
 #preview a:link {
     color: #fff;
     text-decoration: underline;
@@ -100,7 +105,7 @@ img { display: block; }
     vertical-align: sub;
 }
 #preview code {
-    font-family: Consolas, "Courier New", Courier, mono;
+    font-family: Menlo, Consolas, "Courier New", Courier, mono;
 }
 
 
@@ -126,7 +131,9 @@ img { display: block; }
     font-family: Consolas, "Courier New", Courier, mono;
     background: black;
     background: rgba(0,0,0,.8);
-    color: #eee;
+    color: #fff;
+    border-radius: 5px;
+    margin: 40px 0;
     padding: 10px 20px;
 }
 

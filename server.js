@@ -19,22 +19,28 @@ app.use(express.cookieParser());
 // Logger
 app.use(express.logger('dev'));
 
+
+// Redis
+
+var redis = require("redis").createClient();
+// Setting Up Redis Backed Sessions
+
+app.use(
+  express.session({
+      secret: "lolzima"
+    , store: new RedisStore({client: redis})
+  })
+);
+
 // Launch Main App
 var port = process.env.PORT || 8080;
 app.listen(port);
 
-// Utils
-function twoDigits(d) {
-  if(0 <= d && d < 10) return "0" + d.toString();
-  if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-  return d.toString();
-}
 
-Date.prototype.toMysqlFormat = function() {
-  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
-};
+// -----
+// Database
+// -----
 
-// DB
 var mysql = require("mysql-native");
 function createConnection() {
   var db = mysql.createTCPClient();
@@ -51,18 +57,6 @@ db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMA
 db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content LONGTEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
 db.close();
 
-// Redis
-
-var redis = require("redis").createClient();
-
-// Setting Up Redis Backed Sessions
-
-app.use(
-  express.session({
-      secret: "lolzima"
-    , store: new RedisStore({client: redis})
-  })
-);
 
 // -----
 // Helpers
@@ -75,23 +69,40 @@ var generateId = function() {
   });
 };
 
+function twoDigits(d) {
+  if(0 <= d && d < 10) return "0" + d.toString();
+  if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+  return d.toString();
+}
+
+Date.prototype.toMysqlFormat = function() {
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
+
 // -----
 // Globals
 // -----
-app.locals.username = 'Guest';
 
 
 // =====
 // Routes
 // =====
 
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
 
 // -----
 // General
 // -----
 
 app.get('/', function(req, res) {
-  res.render('home');
+  var data = {};
+
+  res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
+
+  // console.log(req.session);
   // console.log(redis);
 });
 
@@ -113,10 +124,10 @@ app.get('/view/:key', function(req, res) {
 
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
-    data.content = r.result.rows[0];
-    res.render('home', data);
+    data.content = unescape(r.result.rows[0]);
+    res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
 
-    console.log(r.result.rows[0]);
+    //console.log(r.result.rows[0]);
   });
 
 
@@ -128,17 +139,17 @@ app.get('/view/:key', function(req, res) {
 
 app.post('/write/save', function(req, res) {
   var key = generateId();
-  var content = req.body.content
+  var content = escape(req.body.content)
     , created_at = new Date().toMysqlFormat()
-    , created_by = app.locals.username;
+    , created_by = (req.session.username) ? req.session.username : 'guest';
 
   db = createConnection();
 
   var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + created_by + "', '" + created_at + "')";
-  console.log(sql);
+  //console.log(sql);
 
   db.query(sql).on('end', function(r) {
-    console.log(r.result);
+    //console.log(r.result);
     res.json({key: key});  
   });
 
@@ -151,11 +162,11 @@ app.post('/write/save', function(req, res) {
 
 app.post('/write/update', function(req, res) {
   var key = req.body.key;
-  var content = req.body.content
+  var content = escape(req.body.content)
     , modified_at = new Date().toMysqlFormat()
-    , curr_user = app.locals.username
+    , curr_user =  (req.session.username) ? req.session.username : 'guest'
     , created_by;
-
+  //console.log(created_by);
   db = createConnection();
 
   db.query("SELECT created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
@@ -164,7 +175,7 @@ app.post('/write/update', function(req, res) {
     db = createConnection();
 
     if(created_by == curr_user) {
-      console.log("Same Users");
+      //console.log("Same Users");
 
       db.query("UPDATE writes SET content = '" + content + "' WHERE slug = '" + key + "'").on('end', function(r) {
         res.json({status: 'success'});
@@ -172,15 +183,15 @@ app.post('/write/update', function(req, res) {
     }
 
     else {
-      console.log("Different Users");
+      //console.log("Different Users");
       key = generateId();
-      content = req.body.content;
-      
+      content = escape(req.body.content);
+
       var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "')";
-      console.log(sql);
+      //console.log(sql);
 
       db.query(sql).on('end', function(r) {
-        console.log(r.result);
+        //console.log(r.result);
         res.json({key: key});  
       });
     }
@@ -248,38 +259,24 @@ app.get('/auth/twitter/callback', function(req, res, next) {
           // console.log(results, req.session.oauth);
 
           // Save in DB
-          redis.get('user:username:'+results.screen_name+':id', function(err, reply) {
+          db = createConnection();
 
-            if (!reply) {
-              // User doesn't exists - Add New User
-              redis.incr('user_id');
-              redis.get('user_id', function(err, reply) {
-                if (err || !reply) {
-                  console.log(err, reply);
-                  return;
-                }
+          db.query("SELECT id FROM users WHERE username = '" + req.session.username + "'").on('end', function(r) {
+            var exists = (r.result.rows.length == 0) ? false : true;
 
-                var id = parseInt(reply);
-                redis.sadd('user:id', id);
-                redis.hset('user:'+id, 'username', results.screen_name);
-                redis.hset('user:'+id, 'service_user_id', results.user_id);
-                // username index
-                redis.set('user:username:'+results.screen_name+':id', id);
-
-                // Set global vars for templates
-                app.locals.username = results.screen_name;
-
-                res.redirect('/');
-              });
-            }
-            else {
-              // User exists
-              app.locals.username = results.screen_name;
+            if(exists)
               res.redirect('/');
+            else {
+              // Create a user
+              db = createConnection();
+              db.query("INSERT INTO users (username, created_at, is_pro) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no')").on('end', function(r) {
+                console.log(r.result);
+                res.redirect('/');
+              })
             }
-
           });
 
+          // res.redirect('/');
         }
 
         return;

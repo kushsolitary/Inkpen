@@ -1,3 +1,44 @@
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('../fonts/aleo/Aleo-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}
 
 * {
 	box-sizing: border-box;
@@ -102,16 +143,24 @@ Profile
 	overflow: auto;
 	position: absolute;
 	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 	padding: 50px;
-	color: #ccc;
-	background: #222;
+	background: #fff;
 	opacity: 0;
 	visibility: hidden;
 	z-index: 10;
 	transition: all 0.2s ease;
+}
+
+#preview .post {
+	width: 800px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#preview .post_info {
+	
 }
 
 #about {
