@@ -125,7 +125,7 @@ app.get('/view/:key', function(req, res) {
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
     data.content = unescape(r.result.rows[0]);
-    res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
+    res.render('view', {data: data, username: (req.session.username) ? req.session.username : false});
 
     //console.log(r.result.rows[0]);
   });

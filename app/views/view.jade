@@ -5,125 +5,17 @@ html(lang="en")
     meta(charset="UTF-8")
     
     title Distraction Free Writing
-
-    meta(name="title", content="Inkpen: Distraction Free Writing")
-    meta(name="description", content="We created this small application for you, if you like to write without distractions.")
-    
-    link(href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic,900', rel='stylesheet', type='text/css')
-    link(rel="stylesheet", href="/css/style.css")
-    link(rel="stylesheet", href="/css/typography.css")
-      
-    script
-      if (location.hostname === "localhost") { document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>') }
-
+    include includes/head
   body.dark
 
-    // Settings/Info
-    input#toggle(type="checkbox", name="toggle")
-    label.toggle(for="toggle")
+    div#preview(style="opacity: 0; visibility: visible")
+      .post= data.content
 
-    #about
-      .logo
-
-      h3 About
-
-      p.
-        This little app has been created for those who want
-        to write without any distractions. Ctrl+M (or ⌘+M) for Markdown
-        Conversion.
-
-      p
-        | Source on 
-        a(href="http://github.com/kushsolitary/Write", target="_blank") Github
-        | .
-
-      h3 Sign in
-
-      ul
-        li
-          if !username
-            a(href="/auth/twitter") Twitter
-          else
-            p Howdy  
-              a(href="http://twitter.com/#{username}", target="_blank") #{username}! 
-              | Here are some of your recent write-ups:
-      p
-
-      h3 Preferences
-
-      p
-        a#muteBtn(href="javascript:void(0);") sounds
-        |  : 
-        span#muteVal yes
-        
-        br
-
-        a#fsBtn(href="javascript:void(0);") fullscreen
-        |  : 
-        span#fsVal no
-
-        br
-
-        a#thmBtn(href="javascript:void(0);") theme
-        |  : 
-        span#thmVal dark
-
-        br
-
-        | Fullscreen might not work sometimes.
-    
-      p
-        | There are around 
-        a#wordCount 0 words
-        |  in your current document.
-
-
-      h3 Credits
-
-      ul
-        li
-          a(href="http://twitter.com/kushsolitary", target="_blank") Kushagra
-
-        li
-          a(href="http://twitter.com/_rishabhp", target="_blank") Rishabh
-
-    // Notification
-    p.notify
-      | Saving...
-      
-    section#profile
-      if username
-        a(href="javascript:void(0);")
-          img(src="https://api.twitter.com/1/users/profile_image/#{username}", width="40")
-      else
-        a(href="/auth/twitter/")
-          img(src="/img/twitter.png", width="40")
-
-    // Heart
-    section#write
-      textarea#text(placeholder="Start writing here.", name="content")= data.content
-
-    // Preview
-    div#preview
-
+    include includes/foot
     script
-      window.key = '#{data.key}';
+      $(".post").each(function() {
+        var text = $(this).html();
+        $(this).html(converter.makeHtml(text));
 
-    // Scripts
-    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js")
-    script(src="https://raw.github.com/LeaVerou/prefixfree/gh-pages/prefixfree.min.js")
-    script(src="/js/buzz.js")
-    script(src="/js/Markdown.Converter.js")
-    script(src="/js/script.js")
-
-    script
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-28350469-1']);
-      _gaq.push(['_setDomainName', 'solitarydesigns.net']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        $("#preview").animate({"opacity": 1}, 300);
+      });
