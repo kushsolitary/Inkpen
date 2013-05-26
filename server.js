@@ -135,6 +135,24 @@ app.get('/view/:key', function(req, res) {
 
 });
 
+app.get('/edit/:key', function(req, res) {
+  var key = req.params.key;
+  var data = {};
+  db = createConnection();
+
+  db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
+    data.key = key;
+    data.content = unescape(r.result.rows[0]);
+    res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
+
+    //console.log(r.result.rows[0]);
+  });
+
+
+  db.close();
+
+});
+
 // Save Writeup
 
 app.post('/write/save', function(req, res) {

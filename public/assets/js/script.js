@@ -311,7 +311,7 @@ function init() {
 				{content: content, "key": key},
 				function(data) {
 					if (data.key) {
-						location.href = '/view/'+data.key;
+						location.href = '/edit/'+data.key;
 					}
 					notify('Updated successfully.', 'success');
 				},
