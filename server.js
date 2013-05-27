@@ -108,7 +108,7 @@ app.get('/auth/twitter', function(req, res) {
     "https://api.twitter.com/oauth/access_token",
     "3H9mJB3pfIgrnu4v6WKWg",
     "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
-    "1.1A",
+    "1.0a",
     "http://" + host + "/auth/twitter/callback",
     "HMAC-SHA1"
   );
@@ -166,13 +166,13 @@ app.get('/auth/twitter/callback', function(req, res, next) {
                 req.session.oauth.access_token, 
                 req.session.oauth.access_token_secret,
                 function(error, data) {
-                  console.log(error);
+                  console.log("https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,req.session.oauth.access_token,req.session.oauth.access_token_secret);
                   data = JSON.parse(data);
                   req.session.profile_image = data.profile_image_url.replace("_normal", "");
                   req.session.fullname = data.name;
 
                   db = createConnection();
-                  db.query("INSERT INTO users (username, created_at, is_pro) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no')").on('end', function(r) {
+                  db.query("INSERT INTO users (username, created_at, is_pro, fullname, profile_image) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no', '"+req.session.fullname+"', '"+req.session.profile_image+"')").on('end', function(r) {
                     // console.log(r.result);
                     res.redirect('/');
                   })

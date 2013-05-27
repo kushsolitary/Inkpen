@@ -35,7 +35,7 @@ html(lang="en")
             a(href="/auth/twitter") Twitter
           else
             p Howdy  
-              a(href="http://twitter.com/#{username}", target="_blank") #{username}! 
+              a(href="http://twitter.com/#{username}", target="_blank") #{fullname}! 
               | Here are some of your recent write-ups:
       p
 
@@ -84,7 +84,7 @@ html(lang="en")
     section#profile
       if username
         a(href="javascript:void(0);")
-          img(src="https://api.twitter.com/1/users/profile_image/#{username}", width="40")
+          img(src="#{profile_image}", width="40")
       else
         a(href="/auth/twitter/")
           img(src="/img/twitter.png", width="40")
