@@ -306,6 +306,8 @@ function init() {
 				// console.log(window.key);
 			}
 
+			notify('Saving...', 'working');
+
 			$.post(
 				url,
 				{content: content, "key": key},
@@ -314,10 +316,12 @@ function init() {
 						location.href = '/edit/'+data.key;
 					}
 					notify('Updated successfully.', 'success');
+					remove_notify();
 				},
 				'json'
 			).fail(function() {
 				notify('An error occured while updating.', 'failure');
+				remove_notify();
 			});
 			e.preventDefault();
 
@@ -332,7 +336,13 @@ function notify(text, status) {
 	var ele = $(".notify");
 
 	ele.text(text);
-	ele.addClass((status == 'success') ? 'success' : 'failure');
+	ele.removeClass();
+	ele.addClass('notify ' + status);
 
-	ele.fadeIn(400).delay(2000).fadeOut(400);
+	ele.stop(true, true).fadeIn(400);
+}
+
+function remove_notify() {
+	var ele = $(".notify");
+	ele.delay(2000).fadeOut(500);
 }

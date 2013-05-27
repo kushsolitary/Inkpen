@@ -40,6 +40,21 @@
     font-style: italic;
 }
 
+/* Scrollbars */
+::-webkit-scrollbar {
+	width:6px;
+}
+
+::-webkit-scrollbar-track{
+	background:none
+}
+
+::-webkit-scrollbar-thumb{
+	background: #333;
+	border-radius: 50px;
+	border-right:5px solid transparent
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -114,6 +129,10 @@ p.notify.success {
 
 p.notify.failure {
 	color: red;
+}
+
+p.notify.working {
+	color: white;
 }
 
 /*
