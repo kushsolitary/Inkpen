@@ -18,10 +18,11 @@ html(lang="en")
     script
       $(function() {
         var leftPos = $("#preview .post").offset().left;
-        var topPos = $("#preview .post h1").offset().top;
+        var topPos = $("#preview .post").offset().top;
+
         $(".post_info").css({
           "left": leftPos - 80,
-          "top": topPos
+          "top": topPos + 12
         });
         
         $(".post_info").animate({
