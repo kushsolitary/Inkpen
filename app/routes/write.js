@@ -7,7 +7,7 @@ exports.view = function(req, res) {
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
     data.content = unescape(r.result.rows[0]);
-    res.render('view', {data: data, username: (req.session.username) ? req.session.username : false});
+    res.render('view', {data: data});
   });
 
   db.close();
@@ -21,7 +21,12 @@ exports.edit = function(req, res) {
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
     data.content = unescape(r.result.rows[0]);
-    res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
+    res.render('home', {
+      data: data, 
+      username: (req.session.username) ? req.session.username : false,
+      profile_image: (req.session.profile_image) ? req.session.profile_image : false,
+      fullname: (req.session.fullname) ? req.session.fullname : false
+    });
   });
 
   db.close();
@@ -29,7 +34,7 @@ exports.edit = function(req, res) {
 
 exports.save = function(req, res) {
   var key = generateId();
-  var content = escape(req.body.content)
+  var content = escape(req.body.content).replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
     , created_at = new Date().toMysqlFormat()
     , created_by = (req.session.username) ? req.session.username : 'guest';
 
@@ -48,7 +53,7 @@ exports.save = function(req, res) {
 
 exports.update = function(req, res) {
   var key = req.body.key;
-  var content = escape(req.body.content)
+  var content = escape(req.body.content).replace('$lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
     , modified_at = new Date().toMysqlFormat()
     , curr_user =  (req.session.username) ? req.session.username : 'guest'
     , created_by;
