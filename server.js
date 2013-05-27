@@ -45,7 +45,7 @@ createConnection = function() {
 
 // Create tables
 var db = createConnection();
-db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), is_pro VARCHAR(10), created_at DATETIME)");
+db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), fullname VARCHAR(50), profile_image VARCHAR(100), is_pro VARCHAR(10), created_at DATETIME)");
 db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
 db.close();
 
@@ -150,7 +150,7 @@ app.get('/auth/twitter/callback', function(req, res, next) {
           req.session.oauth.access_token = oauth_access_token;
           req.session.oauth.access_token_secret = oauth_access_token_secret;
           req.session.username = results.screen_name;
-          // console.log(results, req.session.oauth);
+          console.log(results, req.session.oauth);
 
           // Save in DB
           db = createConnection();
@@ -161,16 +161,26 @@ app.get('/auth/twitter/callback', function(req, res, next) {
             if(exists)
               res.redirect('/');
             else {
-              // Create a user
-              db = createConnection();
-              db.query("INSERT INTO users (username, created_at, is_pro) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no')").on('end', function(r) {
-                console.log(r.result);
-                res.redirect('/');
-              })
-            }
+              oauth.get( 
+                "https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,
+                req.session.oauth.access_token, 
+                req.session.oauth.access_token_secret,
+                function(error, data) {
+                  console.log(error);
+                  data = JSON.parse(data);
+                  req.session.profile_image = data.profile_image_url.replace("_normal", "");
+                  req.session.fullname = data.name;
+
+                  db = createConnection();
+                  db.query("INSERT INTO users (username, created_at, is_pro) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no')").on('end', function(r) {
+                    // console.log(r.result);
+                    res.redirect('/');
+                  })
+                }
+              );
+            } 
           });
 
-          // res.redirect('/');
         }
 
         return;
@@ -178,7 +188,7 @@ app.get('/auth/twitter/callback', function(req, res, next) {
     );
   }
   else {
-    res.redirect('/login'); // Redirect to login page
+    res.redirect('/'); // Redirect to login page
   }
 
 });
