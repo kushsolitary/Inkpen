@@ -3,16 +3,27 @@ var converter = new Converter();
 
 // View controller
 exports.view = function(req, res) {
-  var key = req.params.key;
+  var key = req.params.key.replace(/'/g, "").replace(/"/g, '');
   var data = {};
   db = createConnection();
 
-  db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    data.key = key;
-    data.content = unescape(r.result.rows[0]);
+  db.query("SELECT content, created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
+    data.content = unescape(r.result.rows[0][0]);
     data.content = converter.makeHtml(data.content);
 
-    res.render('view', {data: data});
+    data.created_by = r.result.rows[0][1];
+
+    if(data.created_by !== 'guest') {
+      db = createConnection();
+
+      db.query("SELECT profile_image, fullname FROM users WHERE username = '" + data.created_by + "'").on('end', function(r) {
+        data.profile_image = r.result.rows[0][0];
+        data.fullname = r.result.rows[0][1];
+
+        res.render('view', {data: data});
+      });
+    }
+
   });
 
   db.close();
