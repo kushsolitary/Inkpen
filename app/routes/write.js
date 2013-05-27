@@ -33,22 +33,37 @@ exports.edit = function(req, res) {
 };
 
 exports.save = function(req, res) {
-  var key = generateId();
   var content = escape(req.body.content).replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
     , created_at = new Date().toMysqlFormat()
-    , created_by = (req.session.username) ? req.session.username : 'guest';
+    , created_by = (req.session.username) ? req.session.username : 'guest'
+    , key;
 
   db = createConnection();
 
-  var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + created_by + "', '" + created_at + "')";
-  //console.log(sql);
+  function regenerate() {
+    key = generateId();
 
-  db.query(sql).on('end', function(r) {
-    //console.log(r.result);
-    res.json({key: key});  
-  });
+    db.query("SELECT * FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
+      var key_exists = (r.result.rows.length == 0) ? false : true;
+      // console.log(key_exists);
 
-  db.close();
+      if(key_exists)
+        regenerate();
+
+      else {
+        db = createConnection();
+        var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + created_by + "', '" + created_at + "')";
+
+        db.query(sql).on('end', function(r) {
+          res.json({key: key});  
+        });
+
+        db.close();
+      }
+    });
+  }
+
+  regenerate();
 }
 
 exports.update = function(req, res) {

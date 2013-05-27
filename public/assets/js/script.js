@@ -49,9 +49,6 @@ function init() {
 	textarea.focus();
 	
 	try {
-		if(localStorage.getItem("firstTime") != "false")
-			localStorage.setItem("firstTime", "true");
-
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
 			document.getElementById("muteVal").innerHTML = "no";	
@@ -194,65 +191,6 @@ function init() {
 		
 		e.preventDefault();
 	}, false);
-
-	try {
-		if(localStorage.getItem("firstTime") == "true") {
-			// Typing Animation - First time users only
-			var introText = "(Refresh to skip this intro)\n\n\nAbout\
-			\n-----\
-			\n\nHello! I created this small webapp to help people write without any distractions.\
-			\n\nThis is the first time intro and you'll never see this again.\
-			\n\nSome Features\n------------\n\n* Markdown support. (Press Ctrl+M or ⌘+M to view the preview)\
-			\n* Autosave using HTML5 localStorage.\
-			\n* More features coming soon.\
-			\n\nTo start typing, just remove everything from here or refresh the page. Happy writing :)";
-
-			var myString = introText,
-				frameRate = 100,
-				myArray = myString.split(""),
-				isStop = false;
-
-				localStorage.firstTime = false;
-				textarea.value = "";
-
-			function frameLooper() {
-				if(myArray.length > 0) {
-					textarea.value += myArray.shift();
-					// console.log(myArray[0]);
-
-					if(myArray[1] != "\n") {
-						if(settings.sound == "yes") {
-							audio_key.volume = 0.2 + (Math.random() * 0.5);
-							audio_key.play();
-						}
-
-						isStop = false;
-					}
-
-					else {
-						if(settings.sound == "yes") {
-							audio_ent.volume = 0.2 + (Math.random() * 0.5);
-							audio_ent.play();
-						}
-
-						isStop = true;
-					}
-				}
-		 	}
-
-			(function loop() {
-				if(isStop)
-					var rand = 300;
-				else
-			    var rand = Math.round(Math.random() * (150 - 20)) + 20;
-
-			    setTimeout(function() {
-            frameLooper();
-            loop();  
-			    }, rand);
-			})();
-		}
-	} catch(e) {}
 
 	function requestFullScreen(element) {
     // Supports most browsers and their versions.
