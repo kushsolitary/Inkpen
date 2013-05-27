@@ -12,7 +12,8 @@ html(lang="en")
       .post!= data.content
       .post_info
         if data.created_by != "guest"
-          .author(style="background-image: url(#{data.profile_image})")
+          a(href="/user/#{data.created_by}") 
+            .author(style="background-image: url(#{data.profile_image})")
 
     include includes/foot
     script
@@ -21,7 +22,7 @@ html(lang="en")
         var topPos = $("#preview .post").offset().top;
 
         $(".post_info").css({
-          "left": leftPos - 80,
+          "left": leftPos - 80 ,
           "top": topPos + 12
         });
         

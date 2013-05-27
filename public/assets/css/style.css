@@ -192,7 +192,6 @@ body.view #preview {
 #preview .post_info {
 	opacity: 0;
 	position: absolute;
-	left: 300px;
 	top: 121px;
 }
 

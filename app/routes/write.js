@@ -8,22 +8,25 @@ exports.view = function(req, res) {
   db = createConnection();
 
   db.query("SELECT content, created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    data.content = unescape(r.result.rows[0][0]);
-    data.content = converter.makeHtml(data.content);
+    if(r.result.rows.length > 0 ) {
+      data.content = unescape(r.result.rows[0][0]);
+      data.content = converter.makeHtml(data.content);
 
-    data.created_by = r.result.rows[0][1];
+      data.created_by = r.result.rows[0][1];
 
-    if(data.created_by !== 'guest') {
-      db = createConnection();
+      if(data.created_by !== 'guest') {
+        db = createConnection();
 
-      db.query("SELECT profile_image, fullname FROM users WHERE username = '" + data.created_by + "'").on('end', function(r) {
-        data.profile_image = r.result.rows[0][0];
-        data.fullname = r.result.rows[0][1];
+        db.query("SELECT profile_image, fullname FROM users WHERE username = '" + data.created_by + "'").on('end', function(r) {
+          data.profile_image = r.result.rows[0][0];
+          data.fullname = r.result.rows[0][1];
 
-        res.render('view', {data: data});
-      });
+          res.render('view', {data: data});
+        });
+      }
     }
-
+    else
+      res.redirect('/');
   });
 
   db.close();
@@ -37,13 +40,18 @@ exports.edit = function(req, res) {
 
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
-    data.content = unescape(r.result.rows[0]);
-    res.render('home', {
-      data: data, 
-      username: (req.session.username) ? req.session.username : false,
-      profile_image: (req.session.profile_image) ? req.session.profile_image : false,
-      fullname: (req.session.fullname) ? req.session.fullname : false
-    });
+
+    if(r.result.rows.length > 0) {
+      data.content = unescape(r.result.rows[0]);
+      res.render('home', {
+        data: data, 
+        username: (req.session.username) ? req.session.username : false,
+        profile_image: (req.session.profile_image) ? req.session.profile_image : false,
+        fullname: (req.session.fullname) ? req.session.fullname : false
+      });
+    }
+    else 
+      res.redirect('/');
   });
 
   db.close();
