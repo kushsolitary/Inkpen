@@ -1,12 +1,17 @@
-// dashboard controller
+var Converter = require("../../public/assets/js/Markdown.Converter").Converter;
+var converter = new Converter();
+
 exports.view = function(req, res) {
   var key = req.params.key;
   var data = {};
   db = createConnection();
 
+
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
     data.content = unescape(r.result.rows[0]);
+    data.content = converter.makeHtml(data.content);
+
     res.render('view', {data: data});
   });
 

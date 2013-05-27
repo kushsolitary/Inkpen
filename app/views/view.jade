@@ -8,14 +8,7 @@ html(lang="en")
     include includes/head
   body.dark
 
-    div#preview(style="opacity: 0; visibility: visible")
-      .post= data.content
+    div#preview(style="opacity: 1; visibility: visible")
+      .post!= data.content
 
     include includes/foot
-    script
-      $(".post").each(function() {
-        var text = $(this).html();
-        $(this).html(converter.makeHtml(text));
-
-        $("#preview").animate({"opacity": 1}, 300);
-      });
