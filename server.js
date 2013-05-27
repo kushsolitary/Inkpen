@@ -1,6 +1,5 @@
 
 var express = require('express')
-  // Main App
   , app = express()
   , RedisStore = require('connect-redis')(express);
 
@@ -8,22 +7,15 @@ var express = require('express')
 app.use(express.static(__dirname + '/public/assets'));
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
-// Let jade not print everything in a single line
+
 app.locals.pretty = true;
 
-
-// Parse POST Data
 app.use(express.bodyParser());
-// Parse Cookie Data
 app.use(express.cookieParser());
-// Logger
 app.use(express.logger('dev'));
 
-
 // Redis
-
 var redis = require("redis").createClient();
-// Setting Up Redis Backed Sessions
 
 app.use(
   express.session({
@@ -42,7 +34,7 @@ app.listen(port);
 // -----
 
 var mysql = require("mysql-native");
-function createConnection() {
+createConnection = function() {
   var db = mysql.createTCPClient();
   db.set('auto_prepare', true)
     .set('row_as_hash', false)
@@ -62,7 +54,7 @@ db.close();
 // Helpers
 // -----
 
-var generateId = function() {
+generateId = function() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
       return v.toString(16);
@@ -79,146 +71,27 @@ Date.prototype.toMysqlFormat = function() {
   return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
 };
 
-// -----
-// Globals
-// -----
-
 
 // =====
 // Routes
 // =====
 
-app.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
-});
+var homeC = require('./app/routes/home.js');
+var writeC = require('./app/routes/write.js');
 
-// -----
-// General
-// -----
+app.get('/logout', homeC.logout);
+app.get('/', homeC.show);
 
-app.get('/', function(req, res) {
-  var data = {};
-
-  res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
-
-  // console.log(req.session);
-  // console.log(redis);
-});
+app.get('/view/:key', writeC.view);
+app.get('/edit/:key', writeC.edit);
+app.post('/write/save', writeC.save);
+app.post('/write/update', writeC.update);
 
 // Tmp Favicon Fallback
 app.get('/favicon.ico', function(req, res) {
   
 });
 
-// -----
-// Writeup
-// -----
-
-// Get Writeup
-
-app.get('/view/:key', function(req, res) {
-  var key = req.params.key;
-  var data = {};
-  db = createConnection();
-
-  db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    data.key = key;
-    data.content = unescape(r.result.rows[0]);
-    res.render('view', {data: data, username: (req.session.username) ? req.session.username : false});
-
-    //console.log(r.result.rows[0]);
-  });
-
-
-  db.close();
-
-});
-
-app.get('/edit/:key', function(req, res) {
-  var key = req.params.key;
-  var data = {};
-  db = createConnection();
-
-  db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    data.key = key;
-    data.content = unescape(r.result.rows[0]);
-    res.render('home', {data: data, username: (req.session.username) ? req.session.username : false});
-
-    //console.log(r.result.rows[0]);
-  });
-
-
-  db.close();
-
-});
-
-// Save Writeup
-
-app.post('/write/save', function(req, res) {
-  var key = generateId();
-  var content = escape(req.body.content)
-    , created_at = new Date().toMysqlFormat()
-    , created_by = (req.session.username) ? req.session.username : 'guest';
-
-  db = createConnection();
-
-  var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + created_by + "', '" + created_at + "')";
-  //console.log(sql);
-
-  db.query(sql).on('end', function(r) {
-    //console.log(r.result);
-    res.json({key: key});  
-  });
-
-  db.close();
-
-
-});
-
-// Update Writeup
-
-app.post('/write/update', function(req, res) {
-  var key = req.body.key;
-  var content = escape(req.body.content)
-    , modified_at = new Date().toMysqlFormat()
-    , curr_user =  (req.session.username) ? req.session.username : 'guest'
-    , created_by;
-  //console.log(created_by);
-  db = createConnection();
-
-  db.query("SELECT created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    created_by = r.result.rows[0];
-
-    db = createConnection();
-
-    if(created_by == curr_user) {
-      //console.log("Same Users");
-
-      db.query("UPDATE writes SET content = '" + content + "' WHERE slug = '" + key + "'").on('end', function(r) {
-        res.json({status: 'success'});
-      });
-    }
-
-    else {
-      //console.log("Different Users");
-      key = generateId();
-      content = escape(req.body.content);
-
-      var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "')";
-      //console.log(sql);
-
-      db.query(sql).on('end', function(r) {
-        //console.log(r.result);
-        res.json({key: key});  
-      });
-    }
-  });
-
-
-  db.close();
-  
-});
 
 // -----
 // Twitter oAuth
@@ -309,7 +182,3 @@ app.get('/auth/twitter/callback', function(req, res, next) {
   }
 
 });
-
-// -----
-// User Profile
-// -----
