@@ -115,7 +115,7 @@ app.get('/auth/twitter', function(req, res) {
 
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results) {
     if (error) {
-      console.log(error, config.twitter_consumer_secret);
+      // console.log(error, config.twitter_consumer_secret);
       res.send("Authentication Failed!");
     }
     else {
@@ -150,7 +150,7 @@ app.get('/auth/twitter/callback', function(req, res, next) {
           req.session.oauth.access_token = oauth_access_token;
           req.session.oauth.access_token_secret = oauth_access_token_secret;
           req.session.username = results.screen_name;
-          console.log(results, req.session.oauth);
+          // console.log(results, req.session.oauth);
 
           // Save in DB
           db = createConnection();
@@ -158,15 +158,22 @@ app.get('/auth/twitter/callback', function(req, res, next) {
           db.query("SELECT id FROM users WHERE username = '" + req.session.username + "'").on('end', function(r) {
             var exists = (r.result.rows.length == 0) ? false : true;
 
-            if(exists)
-              res.redirect('/');
+            if(exists) {
+              db.query("SELECT profile_image, fullname FROM users WHERE username = '" + req.session.username + "'").on('end', function(r) {
+                req.session.profile_image = r.result.rows[0][0];
+                req.session.fullname = r.result.rows[0][1];
+
+                res.redirect('/');
+              });
+            }
+
             else {
               oauth.get( 
                 "https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,
                 req.session.oauth.access_token, 
                 req.session.oauth.access_token_secret,
                 function(error, data) {
-                  console.log("https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,req.session.oauth.access_token,req.session.oauth.access_token_secret);
+                  // console.log("https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,req.session.oauth.access_token,req.session.oauth.access_token_secret);
                   data = JSON.parse(data);
                   req.session.profile_image = data.profile_image_url.replace("_normal", "");
                   req.session.fullname = data.name;

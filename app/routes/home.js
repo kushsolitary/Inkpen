@@ -7,6 +7,8 @@ exports.show = function(req, res) {
     profile_image: (req.session.profile_image) ? req.session.profile_image : false,
     fullname: (req.session.fullname) ? req.session.fullname : false
   });
+
+  console.log(req.session.profile_image);
 };
 
 exports.logout = function(req, res) {

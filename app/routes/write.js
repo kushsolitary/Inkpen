@@ -1,11 +1,11 @@
 var Converter = require("../../public/assets/js/Markdown.Converter").Converter;
 var converter = new Converter();
 
+// View controller
 exports.view = function(req, res) {
   var key = req.params.key;
   var data = {};
   db = createConnection();
-
 
   db.query("SELECT content FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
     data.key = key;
@@ -18,6 +18,7 @@ exports.view = function(req, res) {
   db.close();
 };
 
+// Edit controller
 exports.edit = function(req, res) {
   var key = req.params.key;
   var data = {};
@@ -37,6 +38,7 @@ exports.edit = function(req, res) {
   db.close();
 };
 
+// Save controller
 exports.save = function(req, res) {
   var content = escape(req.body.content).replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
     , created_at = new Date().toMysqlFormat()
@@ -71,6 +73,7 @@ exports.save = function(req, res) {
   regenerate();
 }
 
+// Update controller
 exports.update = function(req, res) {
   var key = req.body.key;
   var content = escape(req.body.content).replace('$lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
@@ -85,7 +88,7 @@ exports.update = function(req, res) {
 
     db = createConnection();
 
-    if(created_by == curr_user) {
+    if(created_by == curr_user && curr_user != "guest") {
       //console.log("Same Users");
 
       db.query("UPDATE writes SET content = '" + content + "' WHERE slug = '" + key + "'").on('end', function(r) {
