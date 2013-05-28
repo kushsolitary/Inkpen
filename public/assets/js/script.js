@@ -296,8 +296,8 @@ function init() {
 		if(route.indexOf('edit') > -1) {
 			if(e.altKey && keyCode == 86) {
 				location.href = '/view/' + key;
-			}
 			e.preventDefault();
+			}
 		}
 
 		// Delete a write-up
