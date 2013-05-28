@@ -12,29 +12,29 @@ html(lang="en")
     input#toggle(type="checkbox", name="toggle")
     label.toggle(for="toggle")
 
+    .settings
+      a#muteBtn(href="javascript: void(0)")
+        i.icon-volume-up
+
+      a#fsBtn(href="javascript: void(0)")
+        i.icon-fullscreen
+
+      a#thmBtn(href="javascript: void(0)")
+        i.icon-adjust
+
     #about
       .logo
 
-      h3 About
-
-      p.
-        This little app has been created for those who want
-        to write without any distractions. Ctrl+M (or ⌘+M) for Markdown
-        Conversion.
-
-      p
-        | Source on 
-        a(href="http://github.com/kushsolitary/Write", target="_blank") Github
-        | .
-
-      h3 Sign in
+      if !username
+        h3 Sign in
+      else
+        h3= fullname
 
       if !username
         a(href="/auth/twitter") Twitter
+        p
       else
-        p Howdy  
-          a(href="http://twitter.com/#{username}", target="_blank") #{fullname}
-          | ! 
+        p   
           if writes.length > 0
             | You have saved #{writes.length} write-ups. Here are some of them:
 
@@ -46,12 +46,14 @@ html(lang="en")
             | Seems like haven't saved anything yet. Try Ctrl+S (or ⌘+S) to
             | save/update your post on the server!
 
-          br
-          a.more(href="javascript: void(0)") More
+          if writes.length > 5
+            br
+            a.more(href="javascript: void(0)") More
+          p
 
       h3 Preferences
 
-      p
+      //p
         a#muteBtn(href="javascript:void(0);") sounds
         |  : 
         span#muteVal yes
@@ -78,14 +80,19 @@ html(lang="en")
         |  in your current document.
 
 
-      h3 Credits
+      h3 About
 
-      ul
-        li
-          a(href="http://twitter.com/kushsolitary", target="_blank") Kushagra
+      p
+        | Hi! I'm  
+        a(href="http://kushagra.me") Kushagra Agarwal 
+        | and I created this app using Nodejs for those who want to write without any distractions. 
 
-        li
-          a(href="http://twitter.com/_rishabhp", target="_blank") Rishabh
+      p Take a look at 
+        a(href="/view/documentation") the docs 
+        | or shoot me an 
+        a(href="mailto:hi@kushagra.me") email 
+        | if you need any help.
+
 
     // Notification
     p.notify
@@ -95,9 +102,18 @@ html(lang="en")
       if username
         a(href="javascript:void(0);")
           img(src="#{profile_image}", width="40")
+
+        // Dropdown
+        ul
+          li
+            a(href="#") New writeup
+          li
+            a(href="#") 
+          li
+            a(href="#") 
       else
         a(href="/auth/twitter/")
-          //img(src="/img/twitter.png", width="40")
+          i.icon-twitter
 
     // Heart
     section#write
@@ -105,8 +121,6 @@ html(lang="en")
 
     // Preview
     div#preview
-      .post_info
-        .avatar
       .post
 
     include includes/foot

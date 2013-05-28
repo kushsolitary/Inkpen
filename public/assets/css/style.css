@@ -55,6 +55,9 @@
 	border-right:5px solid transparent
 }
 
+#about::-webkit-scrollbar-thumb{background: transparent; transition: all 0.3s ease;}
+#about:hover::-webkit-scrollbar-thumb{background: #333;}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -83,8 +86,43 @@ body.light {
 }
 
 body {
-	transition: all .2s ease;
+	transition: all .3s ease;
 }
+
+/*
+Icons
+------
+*/
+
+.settings {
+	position: absolute;
+	top: 0;
+	left: 45px;
+	opacity: 0.4;
+	transition: all 0.3s ease;
+}
+
+.settings:hover {
+	opacity: 1
+}
+
+.settings a{
+	color: white;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 20px;
+	padding: 8px 12px;
+}
+
+.dark .settings a {color: #555;}
+
+.settings a:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.dark .settings a:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
 
 /*
 Write Area
@@ -100,7 +138,7 @@ Write Area
 #text {
 	height: 100%;
 	width: 100%;
-	padding: 50px;
+	padding: 100px 100px;
 	background: transparent;
 	font: normal 18px/25px Menlo, Consolas, "Courier New", monospace;
 	border: 0;
@@ -108,7 +146,7 @@ Write Area
 	color: inherit;
 	resize: none;
 	text-shadow: none;
-	transition: all .2s ease;
+	transition: padding .3s ease;
 }
 
 /*
@@ -145,17 +183,32 @@ Profile
 	right: 8px; top: 8px;
 }
 
-#profile img {
+#profile img, #profile i {
 	opacity: 0.5;
+	display: block;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	line-height: 40px;
+	color: #aaa;
+	font-size: 20px;
 	border-radius: 3px;
 	background: #333;
+	text-decoration: none;
 }
 
-#profile img:hover {
+#profile img:hover, #profile i:hover {
 	opacity: 1;
 }
 
-.light #profile img {background: #fff;}
+#profile a {
+	text-decoration: none;
+	outline: none;
+}
+
+.light #profile img, .light #profile i {
+	background: #fff;
+}
 
 /* Text Styles */
 #preview {
@@ -170,7 +223,7 @@ Profile
 	opacity: 0;
 	visibility: hidden;
 	z-index: 10;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
 }
 
 body.view #preview {
@@ -212,7 +265,7 @@ body.view #preview {
 	position: absolute;
 	left: -350px;
 	top: 0;
-	transition: all .2s ease;
+	transition: all .3s ease;
 
 	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
 	overflow: auto;
@@ -232,6 +285,7 @@ body.view #preview {
 
 #toggle:checked ~ #about{ left: -50px; }
 #toggle:checked ~ #write > #text{ padding-left: 350px; }
+#toggle:checked ~ .settings {left: 350px;}
 
 .toggle {
 	position: absolute;
@@ -241,7 +295,7 @@ body.view #preview {
 	height: 36px;
 	z-index: 5;
 	cursor: pointer;
-	transition: all .2s ease;
+	transition: all .3s ease;
 }
 
 .toggle:before {
@@ -292,6 +346,7 @@ body.view #preview {
 /* Writes listings */
 #about ul.writes li {
 	display: block;
+	color: #555;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

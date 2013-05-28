@@ -51,12 +51,12 @@ function init() {
 	try {
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
-			document.getElementById("muteVal").innerHTML = "no";	
+			// document.getElementById("muteVal").innerHTML = "no";	
 		}
 
 		if(localStorage.getItem("theme") == "light") {
 			settings.theme = "light";
-			document.getElementById("thmVal").innerHTML = "light";	
+			// document.getElementById("thmVal").innerHTML = "light";	
 
 			$("body").removeClass("dark");
 			$("body").addClass("light");
@@ -136,13 +136,20 @@ function init() {
 	settings.soundBtn.addEventListener("click", function(e) {
 		if(settings.sound == "yes") {
 			settings.sound = "no"
-			document.getElementById("muteVal").innerHTML = "no";
+			// document.getElementById("muteVal").innerHTML = "no";
+
+			$(this).find('i').removeClass();
+			$(this).find('i').addClass('icon-volume-off');
+
 			localStorage.setItem("sound", "no");
 		}
 
 		else {
 			settings.sound = "yes"
-			document.getElementById("muteVal").innerHTML = "yes";
+			// document.getElementById("muteVal").innerHTML = "yes";
+			$(this).find('i').removeClass();
+			$(this).find('i').addClass('icon-volume-up');
+
 			localStorage.setItem("sound", "yes");
 		}
 
@@ -152,14 +159,14 @@ function init() {
 	settings.fullBtn.addEventListener("click", function(e) {
 		if(settings.full == "yes") {
 			settings.full = "no"
-			document.getElementById("fsVal").innerHTML = "no";
+			// document.getElementById("fsVal").innerHTML = "no";
 
 			cancelFullScreen(document.body);
 		}
 
 		else {
 			settings.full = "yes"
-			document.getElementById("fsVal").innerHTML = "yes";
+			// document.getElementById("fsVal").innerHTML = "yes";
 
 			requestFullScreen(document.body);
 			document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);		
@@ -171,7 +178,7 @@ function init() {
 	settings.thmBtn.addEventListener("click", function(e) {
 		if(settings.theme == "dark") {
 			settings.theme = "light"
-			document.getElementById("thmVal").innerHTML = "light";
+			// document.getElementById("thmVal").innerHTML = "light";
 
 			$("body").removeClass("dark");
 			$("body").addClass("light");
@@ -181,7 +188,7 @@ function init() {
 
 		else {
 			settings.theme = "dark"
-			document.getElementById("thmVal").innerHTML = "dark";
+			// document.getElementById("thmVal").innerHTML = "dark";
 
 			$("body").removeClass("light");
 			$("body").addClass("dark");
