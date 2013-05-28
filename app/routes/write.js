@@ -5,6 +5,8 @@ var converter = new Converter();
 exports.view = function(req, res) {
   var key = req.params.key.replace(/'/g, "").replace(/"/g, '');
   var data = {};
+  data.curr_user = req.session.username;
+
   db = createConnection();
 
   db.query("SELECT content, created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
@@ -23,6 +25,10 @@ exports.view = function(req, res) {
 
           res.render('view', {data: data});
         });
+      }
+
+      else {
+        res.render('view', {data: data});
       }
     }
     else

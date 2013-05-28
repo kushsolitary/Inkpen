@@ -87,7 +87,7 @@ function init() {
 			if(keyCode == 13) {
 				audio_ent.volume = 0.2 + (Math.random() * 0.5);
 				audio_ent.play();
-			} else {
+			} else if(!e.ctrlKey && !e.metaKey && !e.altKey) {
 				audio_key.volume = 0.2 + (Math.random() * 0.5);
 				audio_key.play();
 			}

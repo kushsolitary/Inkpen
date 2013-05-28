@@ -187,12 +187,14 @@ body.view #preview {
 #preview .post {
 	width: 600px;
 	margin: 0 auto;
+	position: relative;
 }
 
 #preview .post_info {
 	opacity: 0;
 	position: absolute;
-	top: 121px;
+	top: 13px;
+	left: -70px;
 }
 
 #preview .post_info .author {
@@ -266,7 +268,7 @@ body.view #preview {
 }
 
 #about h3 {
-	font: normal 12px/30px "Open Sans";
+	font: normal 12px/30px "Open Sans" !important;
 	color: #68934c;
 	text-transform: uppercase;
 	margin: 10px 0px;
