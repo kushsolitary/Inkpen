@@ -136,7 +136,6 @@ exports.update = function(req, res) {
     else {
       //console.log("Different Users");
       key = generateId();
-      content = escape(req.body.content);
 
       var sql = "INSERT INTO writes (slug, content, created_by, created_at) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "')";
       //console.log(sql);
