@@ -8,6 +8,8 @@ html(lang="en")
     include includes/head
   body.dark.view
 
+    a#logoView(href="/") I
+
     div#preview
       .post!= data.content
         if data.created_by != "guest"

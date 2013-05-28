@@ -41,7 +41,7 @@ img { display: block; }
     font-weight: normal;
     color: #774553;
     line-height: 1.2em;
-    font-weight: 900;
+    font-weight: bold;
 }
 #preview h1, #preview h1 a {
     margin-top: 50px;
@@ -77,18 +77,18 @@ img { display: block; }
 }
 
 #preview a:link {
-    color: #fff;
+    color: #68ADC3;
     text-decoration: underline;
 }
 #preview a:active {
-    background: #fff;
+    background: #68ADC3;
     text-decoration: underline;
 }
 #preview a:hover {
     text-decoration: none;
 }
 #preview a:visited {
-    color: #fff;
+    color: #68ADC3;
     text-decoration: underline;
 }
 #preview sup, #preview sub {
@@ -102,10 +102,7 @@ img { display: block; }
     vertical-align: sub;
 }
 #preview code {
-    background: rgba(0,0,0,0.2);
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
+    color: #aaa;
     font-family: Menlo, Consolas, "Courier New", Courier, mono;
 }
 
@@ -135,8 +132,12 @@ img { display: block; }
     color: #fff;
     border-radius: 5px;
     padding: 10px 20px;
+    white-space: pre-wrap;
 }
 
+#preview pre code {
+    color: white;
+}
 
 
 /* Forms */

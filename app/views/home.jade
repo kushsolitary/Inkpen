@@ -47,9 +47,7 @@ html(lang="en")
             | save/update your post on the server!
 
           if writes.length > 5
-            br
-            a.more(href="javascript: void(0)") More
-          p
+            a.more(href="javascript: void(0)") See More
 
       h3 Preferences
 
@@ -100,17 +98,17 @@ html(lang="en")
       
     section#profile
       if username
-        a(href="javascript:void(0);")
+        a.avatar(href="javascript:void(0);")
           img(src="#{profile_image}", width="40")
 
         // Dropdown
         ul
           li
-            a(href="#") New writeup
+            a(href="/") Write something new
           li
-            a(href="#") 
+            a(href="/view/documentation") Help
           li
-            a(href="#") 
+            a(href="/logout") Logout
       else
         a(href="/auth/twitter/")
           i.icon-twitter

@@ -90,8 +90,8 @@ body {
 }
 
 /*
-Icons
-------
+Settings
+--------
 */
 
 .settings {
@@ -181,10 +181,10 @@ Profile
 #profile {
 	position: absolute;
 	right: 8px; top: 8px;
+	opacity: 0.5;
 }
 
 #profile img, #profile i {
-	opacity: 0.5;
 	display: block;
 	height: 40px;
 	width: 40px;
@@ -197,7 +197,7 @@ Profile
 	text-decoration: none;
 }
 
-#profile img:hover, #profile i:hover {
+#profile:hover {
 	opacity: 1;
 }
 
@@ -206,12 +206,66 @@ Profile
 	outline: none;
 }
 
+#profile ul {
+	transition: all 0.3s ease;
+	position: absolute;
+	border-radius: 5px;
+	list-style: none;
+	width: 200px;
+	right: 0;
+	background: #333;
+	top: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+
+#profile a:hover ~ #profile ul {
+	opacity: 1;
+	visibility: visible;
+	top: 50px;
+}
+
+#profile ul:after, #profile ul:before {
+	content: '';
+	position: absolute;
+	height: 10px;
+	width: 10px;
+	background: #333;
+	top: -5px;
+	right: 14px;
+	transform: rotate(45deg);
+}
+
+#profile ul:after {
+	transform: rotate(0deg);
+	width: 200px;
+	height: 10px;
+	right: 0;
+	top: -10px;
+	background: transparent;
+}
+
+#profile ul li a {
+	display: block;
+	padding: 5px 10px;
+	color: #999;
+}
+
+#profile ul li a:hover {
+	color: white;
+}
+
 .light #profile img, .light #profile i {
 	background: #bbb;
 	color: #777;
 }
 
-/* Text Styles */
+
+/*
+Preview
+-------
+*/
+
 #preview {
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;	
@@ -239,9 +293,15 @@ body.view #preview {
 }
 
 #preview .post {
-	width: 600px;
+	width: 700px;
 	margin: 0 auto;
 	position: relative;
+}
+
+#preview .post img {
+	max-width: 100%;
+	display: block;
+	margin: 10px auto;
 }
 
 #preview .post_info {
@@ -259,6 +319,32 @@ body.view #preview {
 	border-radius: 50%;
 }
 
+#logoView {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	z-index: 20;
+	text-decoration: none;
+	font: 900 40px Aleo;
+	color: #fff;
+	background: #ddd;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+
+/*
+About
+-----
+*/
+
+#about a.more {
+	display: block;
+	padding: 5px 0;
+}
+
 #about {
 	width: 350px;
 	height: 100%;
@@ -274,6 +360,49 @@ body.view #preview {
 	padding: 25px 25px 25px 75px;
 	text-shadow : 0 1px 1px black;
 }
+
+.logo {
+	width: 178px;
+	height: 84px;
+	background: url(../img/logo.png) no-repeat;
+	margin: 0px auto 40px;
+}
+
+#about h3 {
+	font: normal 12px/30px "Open Sans" !important;
+	color: #68934c;
+	text-transform: uppercase;
+	margin: 10px 0px;
+	border-bottom: 1px dashed #222;
+}
+
+#about p {
+	color: #555;
+	margin: 10px 0px 25px;
+}
+
+#about a {
+	color: #999;
+	text-decoration: none;
+}
+
+#about ul.writes {
+	list-style: none;
+}
+
+#about ul.writes li {
+	display: block;
+	color: #555;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/*
+Toggle
+------
+*/
 
 #toggle {display: none;}
 #toggle:checked ~ .toggle{
@@ -313,42 +442,4 @@ body.view #preview {
 .light .toggle:before {
 	background: #bbb;
 	box-shadow: 0 -6px #bbb, 0 -12px #bbb;
-}
-
-.logo {
-	width: 178px;
-	height: 84px;
-	background: url(../img/logo.png) no-repeat;
-	margin: 0px auto 40px;
-}
-
-#about h3 {
-	font: normal 12px/30px "Open Sans" !important;
-	color: #68934c;
-	text-transform: uppercase;
-	margin: 10px 0px;
-	border-bottom: 1px dashed #222;
-}
-
-#about p {
-	color: #555;
-	margin: 10px 0px 25px;
-}
-
-#about a {
-	color: #999;
-	text-decoration: none;
-}
-
-#about ul {
-	list-style: none;
-}
-
-/* Writes listings */
-#about ul.writes li {
-	display: block;
-	color: #555;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
