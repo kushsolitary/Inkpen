@@ -301,10 +301,18 @@ function notify(text, status) {
 	ele.removeClass();
 	ele.addClass('notify ' + status);
 
-	ele.stop(true, true).fadeIn(400);
+	ele.stop(true, true).css({
+		"visibility": "visible",
+		"opacity": 1
+	});
 }
 
 function remove_notify() {
 	var ele = $(".notify");
-	ele.delay(2000).fadeOut(500);
+	setTimeout(function() {
+		ele.css({
+			"visibility": "hidden",
+			"opacity": 0
+		});
+	}, 2000);
 }

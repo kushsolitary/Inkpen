@@ -155,22 +155,33 @@ Notifications
 */
 
 p.notify {
+	height: 50px;
+	width: 100%;
 	position: absolute;
-	top: 22px;
-	right: 60px;
-	display: none;
+	left: 0;
+	top: 0;
+	visibility: hidden;
+	opacity: 0;
+	background: green;
+	z-index: 15;
+	line-height: 50px;
+	text-align: center;
+	transition: all 0.3s ease;
 }
 
 p.notify.success {
-	color: green;
+	background: green;
+	color: white;
 }
 
 p.notify.failure {
-	color: red;
+	background: red;
+	color: white;
 }
 
 p.notify.working {
 	color: white;
+	background: green;
 }
 
 /*
@@ -204,55 +215,6 @@ Profile
 #profile a {
 	text-decoration: none;
 	outline: none;
-}
-
-#profile ul {
-	transition: all 0.3s ease;
-	position: absolute;
-	border-radius: 5px;
-	list-style: none;
-	width: 200px;
-	right: 0;
-	background: #333;
-	top: 0;
-	opacity: 0;
-	visibility: hidden;
-}
-
-#profile a:hover ~ #profile ul {
-	opacity: 1;
-	visibility: visible;
-	top: 50px;
-}
-
-#profile ul:after, #profile ul:before {
-	content: '';
-	position: absolute;
-	height: 10px;
-	width: 10px;
-	background: #333;
-	top: -5px;
-	right: 14px;
-	transform: rotate(45deg);
-}
-
-#profile ul:after {
-	transform: rotate(0deg);
-	width: 200px;
-	height: 10px;
-	right: 0;
-	top: -10px;
-	background: transparent;
-}
-
-#profile ul li a {
-	display: block;
-	padding: 5px 10px;
-	color: #999;
-}
-
-#profile ul li a:hover {
-	color: white;
 }
 
 .light #profile img, .light #profile i {
@@ -332,6 +294,12 @@ body.view #preview {
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
+	transition: all 0.3s ease;
+}
+
+#logoView:hover {
+	color: #ddd;
+	background: #333;
 }
 
 
