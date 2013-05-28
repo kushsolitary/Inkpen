@@ -164,10 +164,8 @@ exports.remove = function(req, res) {
       if(r.result.rows.length > 0) {
         db = createConnection();
         db.query("DELETE FROM writes WHERE slug = '"+key+"'").on('end', function(r) {
-          if(r.result.rows.length > 0)
-            res.json({status: 'success'});
-          else
-            res.json({status: 'failure'});
+          // console.log(r.result.rows);
+          res.json({status: 'success'});
         })
       }
       else

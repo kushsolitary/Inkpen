@@ -293,6 +293,8 @@ function init() {
 						'/write/delete',
 						{"key": key},
 						function(data) {
+							//console.log(data.status);
+
 							if(data.status == 'success') {
 								notify('Deleted successfully.', 'success');
 								remove_notify();
