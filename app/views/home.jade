@@ -35,15 +35,18 @@ html(lang="en")
             a(href="/auth/twitter") Twitter
           else
             p Howdy  
-              a(href="http://twitter.com/#{username}", target="_blank") #{fullname}! 
-              | Here are #{writes.length} of your recent write-ups:
+              a(href="http://twitter.com/#{username}", target="_blank") #{fullname}
+              | ! 
+              if writes.length > 0
+                | Here are #{writes.length} of your recent write-ups:
 
-            ul.writes
-              each item in writes
-                li  
-                  a(href="/view/#{item[0]}") #{item[1]}
+                ul.writes
+                  each item, i in writes
+                    li #{i+1})    
+                      a(href="/view/#{item[0]}") #{item[1]}
               else
-                li You got nothing!
+                | Seems like haven't saved anything yet. Try Ctrl+S (or ⌘+S) to
+                | save/update your post on the server!
       p
 
       h3 Preferences
