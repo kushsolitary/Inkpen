@@ -264,15 +264,22 @@ function init() {
 				url,
 				{content: content, "key": key},
 				function(data) {
+					if(data.status != 'failure') {
+						notify('Updated successfully.', 'success');
+						remove_notify();
+					}
+					else {
+						notify('An error occured while updating. Try refreshing the page and try again.', 'failure');
+						remove_notify();
+					}
+
 					if (data.key) {
 						location.href = '/edit/'+data.key;
 					}
-					notify('Updated successfully.', 'success');
-					remove_notify();
 				},
 				'json'
 			).fail(function() {
-				notify('An error occured while updating.', 'failure');
+				notify('An error occured while updating. Try refreshing the page and try again.', 'failure');
 				remove_notify();
 			});
 			e.preventDefault();
@@ -302,13 +309,13 @@ function init() {
 								location.href = '/';
 							}
 							else {
-								notify('An error occured while deleting.', 'failure');
+								notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
 								remove_notify();
 							}
 						},
 						'json'
 					).fail(function() {
-						notify('An error occured while deleting.', 'failure');
+						notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
 						remove_notify();
 					});
 				}

@@ -121,29 +121,34 @@ exports.update = function(req, res) {
   db = createConnection();
 
   db.query("SELECT created_by FROM writes WHERE slug = '" + key + "'").on('end', function(r) {
-    created_by = r.result.rows[0];
+    if(r.result.rows.length > 0) {
+      created_by = r.result.rows[0];
 
-    db = createConnection();
+      db = createConnection();
 
-    if(created_by == curr_user && curr_user != "guest") {
-      //console.log("Same Users");
+      if(created_by == curr_user && curr_user != "guest") {
+        //console.log("Same Users");
 
-      db.query("UPDATE writes SET content = '" + content + "', modified_at = '"+modified_at+"', summary = '"+summary+"' WHERE slug = '" + key + "'").on('end', function(r) {
-        res.json({status: 'success'});
-      });
+        db.query("UPDATE writes SET content = '" + content + "', modified_at = '"+modified_at+"', summary = '"+summary+"' WHERE slug = '" + key + "'").on('end', function(r) {
+          res.json({status: 'success'});
+        });
+      }
+
+      else {
+        //console.log("Different Users");
+        key = generateId();
+
+        var sql = "INSERT INTO writes (slug, content, created_by, created_at, summary) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "', '" +summary+"')";
+        //console.log(sql);
+
+        db.query(sql).on('end', function(r) {
+          //console.log(r.result);
+          res.json({key: key});  
+        });
+      }
     }
-
     else {
-      //console.log("Different Users");
-      key = generateId();
-
-      var sql = "INSERT INTO writes (slug, content, created_by, created_at, summary) VALUES ('" + key + "', '" + content + "', '" + curr_user + "', '" + modified_at + "', '" +summary+"')";
-      //console.log(sql);
-
-      db.query(sql).on('end', function(r) {
-        //console.log(r.result);
-        res.json({key: key});  
-      });
+      res.json({status: 'failure'});
     }
   });
 
