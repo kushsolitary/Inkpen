@@ -81,8 +81,8 @@ body.dark {
 }
 
 body.light {
-	background: #ccc;
-	color: #444;
+	background: #fff;
+	color: #333;
 }
 
 body {
@@ -107,7 +107,7 @@ Icons
 }
 
 .settings a{
-	color: white;
+	color: #bbb;
 	display: inline-block;
 	text-decoration: none;
 	font-size: 20px;
@@ -207,7 +207,8 @@ Profile
 }
 
 .light #profile img, .light #profile i {
-	background: #fff;
+	background: #bbb;
+	color: #777;
 }
 
 /* Text Styles */
@@ -281,7 +282,7 @@ body.view #preview {
 }
 
 .toggle:hover {	background: #000; }
-.light .toggle:hover {	background: #aaa; }
+.light .toggle:hover {	background-color: rgba(0, 0, 0, 0.1); }
 
 #toggle:checked ~ #about{ left: -50px; }
 #toggle:checked ~ #write > #text{ padding-left: 350px; }
@@ -310,8 +311,8 @@ body.view #preview {
 }
 
 .light .toggle:before {
-	background: #fff;
-	box-shadow: 0 -6px #fff, 0 -12px #fff;
+	background: #bbb;
+	box-shadow: 0 -6px #bbb, 0 -12px #bbb;
 }
 
 .logo {
