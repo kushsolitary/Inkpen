@@ -29,25 +29,25 @@ html(lang="en")
 
       h3 Sign in
 
-      ul
-        li
-          if !username
-            a(href="/auth/twitter") Twitter
-          else
-            p Howdy  
-              a(href="http://twitter.com/#{username}", target="_blank") #{fullname}
-              | ! 
-              if writes.length > 0
-                | Here are #{writes.length} of your recent write-ups:
+      if !username
+        a(href="/auth/twitter") Twitter
+      else
+        p Howdy  
+          a(href="http://twitter.com/#{username}", target="_blank") #{fullname}
+          | ! 
+          if writes.length > 0
+            | You have saved #{writes.length} write-ups. Here are some of them:
 
-                ul.writes
-                  each item, i in writes
-                    li #{i+1})    
-                      a(href="/view/#{item[0]}") #{item[1]}
-              else
-                | Seems like haven't saved anything yet. Try Ctrl+S (or ⌘+S) to
-                | save/update your post on the server!
-      p
+            ul.writes
+              each item, i in writes
+                li #{i+1})    
+                  a(href="/view/#{item[0]}") #{item[1]}
+          else
+            | Seems like haven't saved anything yet. Try Ctrl+S (or ⌘+S) to
+            | save/update your post on the server!
+
+          br
+          a.more(href="javascript: void(0)") More
 
       h3 Preferences
 

@@ -102,6 +102,10 @@ img { display: block; }
     vertical-align: sub;
 }
 #preview code {
+    background: rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
     font-family: Menlo, Consolas, "Courier New", Courier, mono;
 }
 

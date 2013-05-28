@@ -272,6 +272,19 @@ function init() {
 
 	}, false);
 
+	// More/Less links in recent writeups
+	$("ul.writes li").each(function(i) {
+		if(i>4)
+			$(this).hide();
+	})
+
+	$("a.more").click(function() {
+		$(this).hide();
+		$("ul.writes li").each(function(i) {
+			$(this).show();
+		})
+	})
+
 }
 
 function notify(text, status) {
