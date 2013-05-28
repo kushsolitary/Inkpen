@@ -6,6 +6,7 @@ exports.view = function(req, res) {
   var key = req.params.key.replace(/'/g, "").replace(/"/g, '');
   var data = {};
   data.curr_user = req.session.username;
+  data.key = key;
 
   db = createConnection();
 

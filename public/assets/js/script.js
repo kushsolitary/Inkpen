@@ -286,38 +286,54 @@ function init() {
 
 		}
 
+		// Open preferences
+		if(e.altKey && keyCode == 79) {
+			$("#toggle").trigger('click');
+			e.preventDefault();
+		}
+
+		// Go to view page
+		if(route.indexOf('edit') > -1) {
+			if(e.altKey && keyCode == 86) {
+				location.href = '/view/' + key;
+			}
+			e.preventDefault();
+		}
+
 		// Delete a write-up
 		if(e.altKey && keyCode == 68) {
 			if (window.key)
 				key = window.key;
 
-			if(key) {
-				if(confirm("Are you sure you want to delete it?")) {
-					// console.log("Delete");
-					notify('Deleting...', 'working');
+			if(route.indexOf('edit') > -1) {
+				if(key) {
+					if(confirm("Are you sure you want to delete it?")) {
+						// console.log("Delete");
+						notify('Deleting...', 'working');
 
-					$.post(
-						'/write/delete',
-						{"key": key},
-						function(data) {
-							//console.log(data.status);
+						$.post(
+							'/write/delete',
+							{"key": key},
+							function(data) {
+								//console.log(data.status);
 
-							if(data.status == 'success') {
-								notify('Deleted successfully.', 'success');
-								remove_notify();
+								if(data.status == 'success') {
+									notify('Deleted successfully.', 'success');
+									remove_notify();
 
-								location.href = '/';
-							}
-							else {
-								notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
-								remove_notify();
-							}
-						},
-						'json'
-					).fail(function() {
-						notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
-						remove_notify();
-					});
+									location.href = '/';
+								}
+								else {
+									notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
+									remove_notify();
+								}
+							},
+							'json'
+						).fail(function() {
+							notify('An error occured while deleting. Try refreshing the page and try again.', 'failure');
+							remove_notify();
+						});
+					}
 				}
 			}
 

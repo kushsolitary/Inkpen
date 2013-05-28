@@ -19,7 +19,17 @@ html(lang="en")
 
     include includes/foot
     script
+      window.key = '#{data.key}';
+
       $(function() {
+        // Go to edit page
+        document.addEventListener('keydown', function(e) {
+          if(e.altKey && e.keyCode == 69) {
+            location.href = '/edit/' + key;
+            e.preventDefault();
+          }
+        }, false);
+
         $(".post_info").animate({
           "opacity": 1
         }, 400);
