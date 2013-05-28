@@ -288,3 +288,11 @@ body.view #preview {
 #about ul {
 	list-style: none;
 }
+
+/* Writes listings */
+#about ul.writes li {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

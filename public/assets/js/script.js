@@ -234,9 +234,13 @@ function init() {
 		}
 
 		if((e.ctrlKey || e.metaKey) && keyCode == 83) {
-			var content = $('#text').val()
-				, url = '/write/save';
+			var content = [];
+			var text = $('#text').val()
+				, url = '/write/save'
+				, summary = text.split("\n")[0];
 
+				content[0] = text;
+				content[1] = summary;
 			if (window.key) {
 				// Update
 				key = window.key;

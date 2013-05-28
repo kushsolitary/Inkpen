@@ -36,7 +36,14 @@ html(lang="en")
           else
             p Howdy  
               a(href="http://twitter.com/#{username}", target="_blank") #{fullname}! 
-              | Here are some of your recent write-ups:
+              | Here are #{writes.length} of your recent write-ups:
+
+            ul.writes
+              each item in writes
+                li  
+                  a(href="/view/#{item[0]}") #{item[1]}
+              else
+                li You got nothing!
       p
 
       h3 Preferences

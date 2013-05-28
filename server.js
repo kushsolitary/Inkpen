@@ -46,7 +46,7 @@ createConnection = function() {
 // Create tables
 var db = createConnection();
 db.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), fullname VARCHAR(50), profile_image VARCHAR(100), is_pro VARCHAR(10), created_at DATETIME)");
-db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME)");
+db.query("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, summary VARCHAR(40), created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME, modified_at DATETIME)");
 db.close();
 
 
