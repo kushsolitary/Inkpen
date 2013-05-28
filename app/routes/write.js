@@ -149,3 +149,31 @@ exports.update = function(req, res) {
 
   db.close();
 }
+
+// Delete controller
+exports.remove = function(req, res) {
+  var key = req.body.key
+    , created_by
+    , curr_user =  (req.session.username) ? req.session.username : 'guest';
+
+  if(curr_user != 'guest') {
+    db = createConnection();
+    db.query("SELECT * FROM writes WHERE created_by = '"+curr_user+"' AND slug = '" + key + "'").on('end', function(r) {
+      // console.log(r.result.rows);
+
+      if(r.result.rows.length > 0) {
+        db = createConnection();
+        db.query("DELETE FROM writes WHERE slug = '"+key+"'").on('end', function(r) {
+          if(r.result.rows > 0)
+            res.json({status: 'success'});
+          else
+            res.json({status: 'failure'});
+        })
+      }
+      else
+        res.json({status: 'failure'});
+    });
+  }
+  else
+    res.json({status: 'failure'});
+}

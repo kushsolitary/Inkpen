@@ -86,6 +86,7 @@ app.get('/view/:key', writeC.view);
 app.get('/edit/:key', writeC.edit);
 app.post('/write/save', writeC.save);
 app.post('/write/update', writeC.update);
+app.post('/write/delete', writeC.remove);
 
 // Tmp Favicon Fallback
 app.get('/favicon.ico', function(req, res) {

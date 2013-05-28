@@ -3,6 +3,7 @@ document.onload = init();
 function init() {
 	var i = 0,
 		k = 0,
+		route = location.pathname,
 		textarea = document.getElementById("text"),
 		preview = document.querySelector("#preview"),
 		post = document.querySelector("#preview .post")
@@ -221,6 +222,7 @@ function init() {
 	document.addEventListener("keydown", function(e) {
 		keyCode = e.keyCode || e.which;
 
+		// Markdown preview
 		if((e.ctrlKey || e.metaKey) && keyCode == 77) {
 			if(!isPreviewActive) {
 				post.innerHTML  = converter.makeHtml(textarea.value);
@@ -240,6 +242,7 @@ function init() {
 			e.preventDefault();
 		}
 
+		// Save / update
 		if((e.ctrlKey || e.metaKey) && keyCode == 83) {
 			var content = [];
 			var text = $('#text').val()
@@ -276,6 +279,41 @@ function init() {
 
 		}
 
+		// Delete a write-up
+		if(e.altKey && keyCode == 68) {
+			if (window.key)
+				key = window.key;
+
+			if(key) {
+				if(confirm("Are you sure you want to delete it?")) {
+					// console.log("Delete");
+					notify('Deleting...', 'working');
+
+					$.post(
+						'/write/delete',
+						{"key": key},
+						function(data) {
+							if(data.status == 'success') {
+								notify('Deleted successfully.', 'success');
+								remove_notify();
+
+								location.href = '/';
+							}
+							else {
+								notify('An error occured while deleting.', 'failure');
+								remove_notify();
+							}
+						},
+						'json'
+					).fail(function() {
+						notify('An error occured while deleting.', 'failure');
+						remove_notify();
+					});
+				}
+			}
+
+			e.preventDefault();
+		}
 
 	}, false);
 
@@ -289,8 +327,8 @@ function init() {
 		$(this).hide();
 		$("ul.writes li").each(function(i) {
 			$(this).show();
-		})
-	})
+		});
+	});
 
 }
 
