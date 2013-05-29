@@ -13,6 +13,7 @@ app.locals.pretty = true;
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.logger('dev'));
+app.use(express.favicon(__dirname + '/public/favicon.png'));
 
 // Redis
 var redis = require("redis").createClient();
@@ -25,7 +26,7 @@ app.use(
 );
 
 // Launch Main App
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 app.listen(port);
 
 
