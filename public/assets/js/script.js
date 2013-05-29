@@ -53,8 +53,8 @@ function init() {
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
 
-			$(".settings").find('a#muteBtn').removeClass();
-			$(".settings").find('a#muteBtn').addClass('icon-volume-off');
+			$(".settings").find('a#muteBtn i').removeClass();
+			$(".settings").find('a#muteBtn i').addClass('icon-volume-off');
 			// document.getElementById("muteVal").innerHTML = "no";	
 		}
 
