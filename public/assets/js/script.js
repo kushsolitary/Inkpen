@@ -52,6 +52,9 @@ function init() {
 	try {
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
+
+			$(".settings").find('i').removeClass();
+			$(".settings").find('i').addClass('icon-volume-off');
 			// document.getElementById("muteVal").innerHTML = "no";	
 		}
 
@@ -144,10 +147,9 @@ function init() {
 
 	// Saving after every 2 seconds
 	try {
-		if(localStorage.getItem("firstTime") == "false")
-			setInterval(function() {
-					localStorage.setItem("text", textarea.value);
-			}, 2000);
+		setInterval(function() {
+				localStorage.setItem("text", textarea.value);
+		}, 2000);
 	} catch(e) {}
 
 	// Settings
