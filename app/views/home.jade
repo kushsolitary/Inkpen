@@ -28,7 +28,8 @@ html(lang="en")
       if !username
         h3 Sign in
       else
-        h3= fullname
+        h3= fullname 
+          a(href="/logout")  - Logout
 
       if !username
         a(href="/auth/twitter") Twitter
