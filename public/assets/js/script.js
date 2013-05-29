@@ -71,14 +71,29 @@ function init() {
 			savedText = localStorage.getItem("text");
 	} catch(e) {}
 
+	// Calculate word count
 	if(savedText) {
 		textarea.value = savedText;
 
 		savedText = savedText.replace(/(^\s*)|(\s*$)/gi,"");
 		savedText = savedText.replace(/[ ]{2,}/gi," ");
 		savedText = savedText.replace(/\n /,"\n");
-		document.getElementById("wordCount").innerHTML = savedText.split(' ').length + " words";
+		words = savedText.split(' ');
+		var count = words.length;
+
+		calcTime(count);
+
+		document.getElementById("wordCount").innerHTML = count + " words";
 	}
+
+	// Calculate reading time
+	function calcTime(count) {
+		var m = Math.floor(count / 200);
+		var s = Math.floor(count % 200 / (200 / 60));
+
+		// console.log(m, s);
+		document.getElementById("readingTime").innerHTML = m + " minutes and " + s + " seconds";
+	}	
 
 	// Play the sound
 	textarea.addEventListener("keydown", function(e) {
@@ -123,6 +138,8 @@ function init() {
 		value = value.replace(/\n /,"\n");
 		document.getElementById("wordCount").innerHTML = value.split(' ').length + " words";
 
+		calcTime(value.split(' ').length);
+  	
   	}, false);
 
 	// Saving after every 2 seconds

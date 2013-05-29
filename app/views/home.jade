@@ -49,7 +49,7 @@ html(lang="en")
           if writes.length > 5
             a.more(href="javascript: void(0)") See More
 
-      h3 Preferences
+      h3 Information
 
       //p
         a#muteBtn(href="javascript:void(0);") sounds
@@ -75,7 +75,14 @@ html(lang="en")
       p
         | There are around 
         a#wordCount 0 words
-        |  in your current document.
+        |  in your current document. Total reading this time of this write-up is 
+        a#readingTime
+        |  .
+
+      p
+        a Hint: 
+        | Hit Ctrl + M or Cmd + M for preview. 
+        a(href="/view/documentation") View more shortcuts.
 
 
       h3 About

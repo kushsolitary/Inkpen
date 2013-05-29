@@ -330,10 +330,10 @@ About
 }
 
 .logo {
-	width: 178px;
-	height: 84px;
+	width: 124px;
+	height: 35px;
 	background: url(../img/logo.png) no-repeat;
-	margin: 0px auto 40px;
+	margin: 40px auto;
 }
 
 #about h3 {
