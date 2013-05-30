@@ -1,9 +1,9 @@
 // dashboard controller
 exports.show = function(req, res) {
   var data = {}
-    , username = (req.session.username) ? req.session.username : false
-    , profile_image = (req.session.profile_image) ? req.session.profile_image : false
-    , fullname = (req.session.fullname) ? req.session.fullname : false;
+    , username = (req.session.username) ? req.session.username : 'guest'
+    , profile_image = (req.session.profile_image) ? req.session.profile_image : 'guest'
+    , fullname = (req.session.fullname) ? req.session.fullname : 'guest';
 
   var writes = [];
 

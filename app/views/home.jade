@@ -26,13 +26,13 @@ html(lang="en")
       a(href="/")
         .logo
 
-      if !username
+      if username == 'guest'
         h3 Sign in
       else
         h3= fullname 
           a(href="/logout")  - Logout
 
-      if !username
+      if username == 'guest'
         a(href="/auth/twitter") Twitter
         p
       else
@@ -53,27 +53,6 @@ html(lang="en")
 
       h3 Information
 
-      //p
-        a#muteBtn(href="javascript:void(0);") sounds
-        |  : 
-        span#muteVal yes
-        
-        br
-
-        a#fsBtn(href="javascript:void(0);") fullscreen
-        |  : 
-        span#fsVal no
-
-        br
-
-        a#thmBtn(href="javascript:void(0);") theme
-        |  : 
-        span#thmVal dark
-
-        br
-
-        | Fullscreen might not work sometimes.
-    
       p
         | There are around 
         a#wordCount 0 words
@@ -106,7 +85,7 @@ html(lang="en")
       | Saving...
       
     section#profile
-      if username
+      if username != 'guest'
         a.avatar(href="javascript:void(0);")
           img(src="#{profile_image}", width="40")
       else
@@ -115,7 +94,7 @@ html(lang="en")
 
     // Heart
     section#write
-      textarea#text(placeholder="Start writing here.", name="content", spellcheck="false")= data.content
+      textarea#text(placeholder="", name="content", spellcheck="false")= data.content
 
     // Preview
     div#preview
