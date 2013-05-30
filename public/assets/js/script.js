@@ -161,15 +161,14 @@ settings.fullBtn.addEventListener("click", function(e) {
 		settings.full = "no"
 		// document.getElementById("fsVal").innerHTML = "no";
 
-		cancelFullScreen(document.body);
+		screenfull.toggle();
 	}
 
 	else {
 		settings.full = "yes"
 		// document.getElementById("fsVal").innerHTML = "yes";
 
-		requestFullScreen(document.body);
-		document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);		
+		screenfull.toggle();
 	}
 	
 	e.preventDefault();
@@ -199,23 +198,6 @@ settings.thmBtn.addEventListener("click", function(e) {
 	e.preventDefault();
 }, false);
 
-function requestFullScreen(element) {
-  // Supports most browsers and their versions.
-  var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-
-  if (requestMethod) { // Native full screen.
-    requestMethod.call(element);
-  } 
-}
-
-function cancelFullScreen(element) {
-  // Supports most browsers and their versions.
-  var requestMethod = element.exitFullscreen || element.webkitCancelFullScreen || element.mozCancelFullScreen;
-
-  if (requestMethod) { // Native full screen.
-    requestMethod.call(element);
-  } 
-}
 
 // Key bindings
 document.addEventListener("keydown", function(e) {

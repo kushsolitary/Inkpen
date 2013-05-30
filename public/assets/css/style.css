@@ -98,12 +98,7 @@ Settings
 	position: absolute;
 	top: 0;
 	left: 45px;
-	opacity: 0.4;
 	transition: all 0.3s ease;
-}
-
-.settings:hover {
-	opacity: 1
 }
 
 .settings a{
@@ -112,6 +107,7 @@ Settings
 	text-decoration: none;
 	font-size: 20px;
 	padding: 8px 12px;
+	transition: all 0.3s ease;
 }
 
 .dark .settings a {color: #555;}
