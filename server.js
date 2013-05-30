@@ -1,4 +1,3 @@
-
 var express = require('express')
   , app = express()
   , RedisStore = require('connect-redis')(express);
@@ -25,9 +24,16 @@ app.use(
   })
 );
 
+// Error handling
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.send(500, 'Something broke!');
+});
+
 // Launch Main App
-var port = process.env.PORT || 80;
-app.listen(port);
+app.listen(8080, 'localhost', function(port) {
+  console.log("Server started on localhost: 8080");
+});
 
 
 // -----
@@ -54,14 +60,6 @@ db.close();
 // -----
 // Helpers
 // -----
-
-generateId = function() {
-  return 'xxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-    return v.toString(16);
-  });
-};
-
 function twoDigits(d) {
   if(0 <= d && d < 10) return "0" + d.toString();
   if(-10 < d && d < 0) return "-0" + (-1*d).toString();
@@ -79,6 +77,7 @@ Date.prototype.toMysqlFormat = function() {
 
 var homeC = require('./app/routes/home.js');
 var writeC = require('./app/routes/write.js');
+var oAuthC = require('./app/routes/oauth.js');
 
 app.get('/logout', homeC.logout);
 app.get('/', homeC.show);
@@ -98,106 +97,5 @@ app.get('/favicon.ico', function(req, res) {
 // -----
 // Twitter oAuth
 // -----
-
-var OAuth = require('oauth').OAuth;
-var oauth;
-
-
-app.get('/auth/twitter', function(req, res) {
-  var host = req.headers.host;
-  oauth = new OAuth(
-    "https://api.twitter.com/oauth/request_token",
-    "https://api.twitter.com/oauth/access_token",
-    "3H9mJB3pfIgrnu4v6WKWg",
-    "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
-    "1.0a",
-    "http://" + host + "/auth/twitter/callback",
-    "HMAC-SHA1"
-  );
-
-  oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results) {
-    if (error) {
-      // console.log(error, config.twitter_consumer_secret);
-      res.send("Authentication Failed!");
-    }
-    else {
-      req.session.oauth = {
-        token: oauth_token,
-        token_secret: oauth_token_secret
-      };
-      // console.log(req.session.oauth);
-      res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-    }
-  });
-
-});
-
-app.get('/auth/twitter/callback', function(req, res, next) {
-
-  if (req.session.oauth) {
-    req.session.oauth.verifier = req.query.oauth_verifier;
-    var oauth_data = req.session.oauth;
-
-    oauth.getOAuthAccessToken(
-      oauth_data.token,
-      oauth_data.token_secret,
-      oauth_data.verifier,
-      function(error, oauth_access_token, oauth_access_token_secret, results) {
-
-        if (error) {
-          console.log(error);
-          res.send("Authentication Failure!");
-        }
-        else {
-          req.session.oauth.access_token = oauth_access_token;
-          req.session.oauth.access_token_secret = oauth_access_token_secret;
-          req.session.username = results.screen_name;
-          // console.log(results, req.session.oauth);
-
-          // Save in DB
-          db = createConnection();
-
-          db.query("SELECT id FROM users WHERE username = '" + req.session.username + "'").on('end', function(r) {
-            var exists = (r.result.rows.length == 0) ? false : true;
-
-            if(exists) {
-              db.query("SELECT profile_image, fullname FROM users WHERE username = '" + req.session.username + "'").on('end', function(r) {
-                req.session.profile_image = r.result.rows[0][0];
-                req.session.fullname = r.result.rows[0][1];
-
-                res.redirect('/');
-              });
-            }
-
-            else {
-              oauth.get( 
-                "https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,
-                req.session.oauth.access_token, 
-                req.session.oauth.access_token_secret,
-                function(error, data) {
-                  // console.log("https://api.twitter.com/1.1/users/show.json?screen_name=" + req.session.username,req.session.oauth.access_token,req.session.oauth.access_token_secret);
-                  data = JSON.parse(data);
-                  req.session.profile_image = data.profile_image_url.replace("_normal", "");
-                  req.session.fullname = data.name;
-
-                  db = createConnection();
-                  db.query("INSERT INTO users (username, created_at, is_pro, fullname, profile_image) VALUES ('"+ req.session.username +"', '"+new Date().toMysqlFormat()+"', 'no', '"+req.session.fullname+"', '"+req.session.profile_image+"')").on('end', function(r) {
-                    // console.log(r.result);
-                    res.redirect('/');
-                  })
-                }
-              );
-            } 
-          });
-
-        }
-
-        return;
-      }
-    );
-  }
-  else {
-    res.redirect('/'); // Redirect to login page
-  }
-
-});
+app.get('/auth/twitter', oAuthC.twitter);
+app.get('/auth/twitter/callback', oAuthC.twitCallback);

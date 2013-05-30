@@ -4,171 +4,370 @@
 1 verbose cli   'install' ]
 2 info using npm@1.2.18
 3 info using node@v0.10.5
-4 verbose read json C:\wamp\www\inkpen\package.json
+4 verbose read json c:\wamp\www\Inkpen\package.json
 5 verbose readDependencies using package.json deps
-6 verbose install where, deps [ 'C:\\wamp\\www\\inkpen',
+6 verbose install where, deps [ 'c:\\wamp\\www\\Inkpen',
 6 verbose install   [ 'express',
 6 verbose install     'jade',
 6 verbose install     'redis',
 6 verbose install     'hiredis',
 6 verbose install     'oauth',
 6 verbose install     'connect-redis',
-6 verbose install     'node-mysql',
-6 verbose install     'mysql@2.0.0-alpha8' ] ]
-7 verbose from cache C:\wamp\www\inkpen\package.json
+6 verbose install     'mysql-native' ] ]
+7 verbose from cache c:\wamp\www\Inkpen\package.json
 8 info preinstall thewriter@0.1.0
-9 verbose read json C:\wamp\www\inkpen\node_modules\connect-redis\package.json
-10 verbose read json C:\wamp\www\inkpen\node_modules\express\package.json
-11 verbose read json C:\wamp\www\inkpen\node_modules\jade\package.json
-12 verbose read json C:\wamp\www\inkpen\node_modules\mysql-native\package.json
-13 verbose read json C:\wamp\www\inkpen\node_modules\oauth\package.json
-14 verbose read json C:\wamp\www\inkpen\node_modules\redis\package.json
-15 verbose from cache C:\wamp\www\inkpen\package.json
+9 verbose read json c:\wamp\www\Inkpen\node_modules\connect-redis\package.json
+10 verbose read json c:\wamp\www\Inkpen\node_modules\express\package.json
+11 verbose read json c:\wamp\www\Inkpen\node_modules\jade\package.json
+12 verbose read json c:\wamp\www\Inkpen\node_modules\mysql-native\package.json
+13 verbose read json c:\wamp\www\Inkpen\node_modules\oauth\package.json
+14 verbose read json c:\wamp\www\Inkpen\node_modules\redis\package.json
+15 verbose from cache c:\wamp\www\Inkpen\package.json
 16 verbose readDependencies using package.json deps
-17 verbose from cache C:\wamp\www\inkpen\node_modules\connect-redis\package.json
-18 verbose from cache C:\wamp\www\inkpen\node_modules\express\package.json
-19 verbose from cache C:\wamp\www\inkpen\node_modules\jade\package.json
-20 verbose from cache C:\wamp\www\inkpen\node_modules\mysql-native\package.json
-21 verbose from cache C:\wamp\www\inkpen\node_modules\oauth\package.json
-22 verbose from cache C:\wamp\www\inkpen\node_modules\redis\package.json
-23 verbose already installed skipping jade@~0.27.7 C:\wamp\www\inkpen
-24 verbose already installed skipping redis@~0.8.2 C:\wamp\www\inkpen
-25 verbose cache add [ 'hiredis@~0.1.14', null ]
-26 verbose cache add name=undefined spec="hiredis@~0.1.14" args=["hiredis@~0.1.14",null]
-27 verbose parsed url { protocol: null,
-27 verbose parsed url   slashes: null,
-27 verbose parsed url   auth: null,
-27 verbose parsed url   host: null,
-27 verbose parsed url   port: null,
-27 verbose parsed url   hostname: null,
-27 verbose parsed url   hash: null,
-27 verbose parsed url   search: null,
-27 verbose parsed url   query: null,
-27 verbose parsed url   pathname: 'hiredis@~0.1.14',
-27 verbose parsed url   path: 'hiredis@~0.1.14',
-27 verbose parsed url   href: 'hiredis@~0.1.14' }
-28 verbose cache add name="hiredis" spec="~0.1.14" args=["hiredis","~0.1.14"]
-29 verbose parsed url { protocol: null,
-29 verbose parsed url   slashes: null,
-29 verbose parsed url   auth: null,
-29 verbose parsed url   host: null,
-29 verbose parsed url   port: null,
-29 verbose parsed url   hostname: null,
-29 verbose parsed url   hash: null,
-29 verbose parsed url   search: null,
-29 verbose parsed url   query: null,
-29 verbose parsed url   pathname: '~0.1.14',
-29 verbose parsed url   path: '~0.1.14',
-29 verbose parsed url   href: '~0.1.14' }
-30 verbose addNamed [ 'hiredis', '~0.1.14' ]
-31 verbose addNamed [ null, '>=0.1.14- <0.2.0-' ]
-32 verbose already installed skipping oauth@~0.9.8 C:\wamp\www\inkpen
-33 verbose already installed skipping connect-redis@~1.4.5 C:\wamp\www\inkpen
-34 verbose cache add [ 'node-mysql@*', null ]
-35 verbose cache add name=undefined spec="node-mysql@*" args=["node-mysql@*",null]
-36 verbose parsed url { protocol: null,
-36 verbose parsed url   slashes: null,
-36 verbose parsed url   auth: null,
-36 verbose parsed url   host: null,
-36 verbose parsed url   port: null,
-36 verbose parsed url   hostname: null,
-36 verbose parsed url   hash: null,
-36 verbose parsed url   search: null,
-36 verbose parsed url   query: null,
-36 verbose parsed url   pathname: 'node-mysql@*',
-36 verbose parsed url   path: 'node-mysql@*',
-36 verbose parsed url   href: 'node-mysql@*' }
-37 verbose cache add name="node-mysql" spec="*" args=["node-mysql","*"]
-38 verbose parsed url { protocol: null,
-38 verbose parsed url   slashes: null,
-38 verbose parsed url   auth: null,
-38 verbose parsed url   host: null,
-38 verbose parsed url   port: null,
-38 verbose parsed url   hostname: null,
-38 verbose parsed url   hash: null,
-38 verbose parsed url   search: null,
-38 verbose parsed url   query: null,
-38 verbose parsed url   pathname: '*',
-38 verbose parsed url   path: '*',
-38 verbose parsed url   href: '*' }
-39 verbose addNamed [ 'node-mysql', '*' ]
-40 verbose addNamed [ null, '' ]
-41 verbose cache add [ 'mysql@2.0.0-alpha8@*', null ]
-42 verbose cache add name=undefined spec="mysql@2.0.0-alpha8@*" args=["mysql@2.0.0-alpha8@*",null]
-43 verbose parsed url { protocol: null,
-43 verbose parsed url   slashes: null,
-43 verbose parsed url   auth: null,
-43 verbose parsed url   host: null,
-43 verbose parsed url   port: null,
-43 verbose parsed url   hostname: null,
-43 verbose parsed url   hash: null,
-43 verbose parsed url   search: null,
-43 verbose parsed url   query: null,
-43 verbose parsed url   pathname: 'mysql@2.0.0-alpha8@*',
-43 verbose parsed url   path: 'mysql@2.0.0-alpha8@*',
-43 verbose parsed url   href: 'mysql@2.0.0-alpha8@*' }
-44 verbose cache add name="mysql" spec="2.0.0-alpha8@*" args=["mysql","2.0.0-alpha8@*"]
-45 verbose parsed url { protocol: null,
-45 verbose parsed url   slashes: null,
-45 verbose parsed url   auth: null,
-45 verbose parsed url   host: null,
-45 verbose parsed url   port: null,
-45 verbose parsed url   hostname: null,
-45 verbose parsed url   hash: null,
-45 verbose parsed url   search: null,
-45 verbose parsed url   query: null,
-45 verbose parsed url   pathname: '2.0.0-alpha8@*',
-45 verbose parsed url   path: '2.0.0-alpha8@*',
-45 verbose parsed url   href: '2.0.0-alpha8@*' }
-46 verbose addNamed [ 'mysql', '2.0.0-alpha8@*' ]
-47 verbose addNamed [ null, null ]
-48 verbose already installed skipping express@~3.0.6 C:\wamp\www\inkpen
-49 silly lockFile 2eb82256-hiredis-0-1-14 hiredis@~0.1.14
-50 verbose lock hiredis@~0.1.14 C:\Users\Kushagra\AppData\Roaming\npm-cache\2eb82256-hiredis-0-1-14.lock
-51 silly lockFile 252ff967-node-mysql node-mysql@*
-52 verbose lock node-mysql@* C:\Users\Kushagra\AppData\Roaming\npm-cache\252ff967-node-mysql.lock
-53 silly lockFile b0aff132-mysql-2-0-0-alpha8 mysql@2.0.0-alpha8@*
-54 verbose lock mysql@2.0.0-alpha8@* C:\Users\Kushagra\AppData\Roaming\npm-cache\b0aff132-mysql-2-0-0-alpha8.lock
-55 silly addNameRange { name: 'hiredis', range: '>=0.1.14- <0.2.0-', hasData: false }
-56 silly addNameRange { name: 'node-mysql', range: '', hasData: false }
-57 info addNameTag [ 'mysql', '2.0.0-alpha8@*' ]
-58 verbose url raw node-mysql
-59 verbose url resolving [ 'https://registry.npmjs.org/', './node-mysql' ]
-60 verbose url resolved https://registry.npmjs.org/node-mysql
-61 info trying registry request attempt 1 at 23:21:15
-62 http GET https://registry.npmjs.org/node-mysql
-63 verbose url raw hiredis
-64 verbose url resolving [ 'https://registry.npmjs.org/', './hiredis' ]
-65 verbose url resolved https://registry.npmjs.org/hiredis
-66 info trying registry request attempt 1 at 23:21:15
-67 verbose etag "5DUTB10MJSI7RL02V9KA1CZKG"
-68 http GET https://registry.npmjs.org/hiredis
-69 verbose url raw mysql
-70 verbose url resolving [ 'https://registry.npmjs.org/', './mysql' ]
-71 verbose url resolved https://registry.npmjs.org/mysql
-72 info trying registry request attempt 1 at 23:21:16
-73 verbose etag "2MHWXBF8PX5SC696XJZM1IOAC"
-74 http GET https://registry.npmjs.org/mysql
-75 http 404 https://registry.npmjs.org/node-mysql
-76 silly registry.get cb [ 404,
-76 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
-76 silly registry.get     date: 'Sat, 25 May 2013 17:51:19 GMT',
-76 silly registry.get     'content-type': 'application/json',
-76 silly registry.get     'content-length': '52',
-76 silly registry.get     'cache-control': 'must-revalidate' } ]
-77 silly lockFile 252ff967-node-mysql node-mysql@*
-78 silly lockFile 252ff967-node-mysql node-mysql@*
-79 error 404 'node-mysql' is not in the npm registry.
-79 error 404 You should bug the author to publish it
-79 error 404
-79 error 404 Maybe try 'npm search mysql'
-79 error 404
-79 error 404 Note that you can also install from a
-79 error 404 tarball, folder, or http url, or git url.
-80 error System Windows_NT 6.2.9200
-81 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
-82 error cwd C:\wamp\www\inkpen
-83 error node -v v0.10.5
-84 error npm -v 1.2.18
-85 error code E404
-86 verbose exit [ 1, true ]
+17 verbose from cache c:\wamp\www\Inkpen\node_modules\connect-redis\package.json
+18 verbose from cache c:\wamp\www\Inkpen\node_modules\express\package.json
+19 verbose from cache c:\wamp\www\Inkpen\node_modules\jade\package.json
+20 verbose from cache c:\wamp\www\Inkpen\node_modules\mysql-native\package.json
+21 verbose from cache c:\wamp\www\Inkpen\node_modules\oauth\package.json
+22 verbose from cache c:\wamp\www\Inkpen\node_modules\redis\package.json
+23 verbose already installed skipping express@~3.0.6 c:\wamp\www\Inkpen
+24 verbose already installed skipping jade@~0.27.7 c:\wamp\www\Inkpen
+25 verbose already installed skipping redis@~0.8.2 c:\wamp\www\Inkpen
+26 verbose cache add [ 'hiredis@~0.1.14', null ]
+27 verbose cache add name=undefined spec="hiredis@~0.1.14" args=["hiredis@~0.1.14",null]
+28 verbose parsed url { protocol: null,
+28 verbose parsed url   slashes: null,
+28 verbose parsed url   auth: null,
+28 verbose parsed url   host: null,
+28 verbose parsed url   port: null,
+28 verbose parsed url   hostname: null,
+28 verbose parsed url   hash: null,
+28 verbose parsed url   search: null,
+28 verbose parsed url   query: null,
+28 verbose parsed url   pathname: 'hiredis@~0.1.14',
+28 verbose parsed url   path: 'hiredis@~0.1.14',
+28 verbose parsed url   href: 'hiredis@~0.1.14' }
+29 verbose cache add name="hiredis" spec="~0.1.14" args=["hiredis","~0.1.14"]
+30 verbose parsed url { protocol: null,
+30 verbose parsed url   slashes: null,
+30 verbose parsed url   auth: null,
+30 verbose parsed url   host: null,
+30 verbose parsed url   port: null,
+30 verbose parsed url   hostname: null,
+30 verbose parsed url   hash: null,
+30 verbose parsed url   search: null,
+30 verbose parsed url   query: null,
+30 verbose parsed url   pathname: '~0.1.14',
+30 verbose parsed url   path: '~0.1.14',
+30 verbose parsed url   href: '~0.1.14' }
+31 verbose addNamed [ 'hiredis', '~0.1.14' ]
+32 verbose addNamed [ null, '>=0.1.14- <0.2.0-' ]
+33 verbose already installed skipping oauth@~0.9.8 c:\wamp\www\Inkpen
+34 verbose already installed skipping connect-redis@~1.4.5 c:\wamp\www\Inkpen
+35 verbose already installed skipping mysql-native@* c:\wamp\www\Inkpen
+36 silly lockFile 2eb82256-hiredis-0-1-14 hiredis@~0.1.14
+37 verbose lock hiredis@~0.1.14 C:\Users\Kushagra\AppData\Roaming\npm-cache\2eb82256-hiredis-0-1-14.lock
+38 silly addNameRange { name: 'hiredis', range: '>=0.1.14- <0.2.0-', hasData: false }
+39 verbose url raw hiredis
+40 verbose url resolving [ 'https://registry.npmjs.org/', './hiredis' ]
+41 verbose url resolved https://registry.npmjs.org/hiredis
+42 info trying registry request attempt 1 at 22:32:02
+43 verbose etag "5DUTB10MJSI7RL02V9KA1CZKG"
+44 http GET https://registry.npmjs.org/hiredis
+45 http 304 https://registry.npmjs.org/hiredis
+46 silly registry.get cb [ 304,
+46 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+46 silly registry.get     etag: '"5DUTB10MJSI7RL02V9KA1CZKG"',
+46 silly registry.get     date: 'Wed, 29 May 2013 17:02:11 GMT',
+46 silly registry.get     'content-length': '0' } ]
+47 verbose etag hiredis from cache
+48 silly addNameRange number 2 { name: 'hiredis', range: '>=0.1.14- <0.2.0-', hasData: true }
+49 silly addNameRange versions [ 'hiredis',
+49 silly addNameRange   [ '0.1.0',
+49 silly addNameRange     '0.1.1',
+49 silly addNameRange     '0.1.2',
+49 silly addNameRange     '0.1.3',
+49 silly addNameRange     '0.1.4',
+49 silly addNameRange     '0.1.5',
+49 silly addNameRange     '0.1.6',
+49 silly addNameRange     '0.1.8',
+49 silly addNameRange     '0.1.9',
+49 silly addNameRange     '0.1.10',
+49 silly addNameRange     '0.1.12',
+49 silly addNameRange     '0.1.13',
+49 silly addNameRange     '0.1.14',
+49 silly addNameRange     '0.1.15' ] ]
+50 verbose addNamed [ 'hiredis', '0.1.15' ]
+51 verbose addNamed [ '0.1.15', '0.1.15' ]
+52 silly lockFile 7ce4b3b8-hiredis-0-1-15 hiredis@0.1.15
+53 verbose lock hiredis@0.1.15 C:\Users\Kushagra\AppData\Roaming\npm-cache\7ce4b3b8-hiredis-0-1-15.lock
+54 verbose read json C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package\package.json
+55 silly lockFile 7ce4b3b8-hiredis-0-1-15 hiredis@0.1.15
+56 silly lockFile 7ce4b3b8-hiredis-0-1-15 hiredis@0.1.15
+57 silly lockFile 2eb82256-hiredis-0-1-14 hiredis@~0.1.14
+58 silly lockFile 2eb82256-hiredis-0-1-14 hiredis@~0.1.14
+59 silly resolved [ { name: 'hiredis',
+59 silly resolved     description: 'Wrapper for reply processing code in hiredis',
+59 silly resolved     version: '0.1.15',
+59 silly resolved     homepage: 'http://github.com/pietern/hiredis-node',
+59 silly resolved     author: { name: 'Pieter Noordhuis', email: 'pcnoordhuis@gmail.com' },
+59 silly resolved     main: 'hiredis',
+59 silly resolved     scripts: { test: 'node test/reader.js', install: 'node-gyp rebuild' },
+59 silly resolved     dependencies: { bindings: '*' },
+59 silly resolved     engines: { node: '>= 0.6.0' },
+59 silly resolved     gypfile: true,
+59 silly resolved     readme: '# hiredis-node\n\nNode extension that wraps [hiredis][hiredis].\nBecause Node is already good at doing I/O, hiredis-node only provides\nbindings to the protocol parser.\nThe hiredis protocol parser is faster than JavaScript protocol parsers,\nbut the speedup only becomes noticable for large replies.\nIf you use Redis for simple SET/GET operations, there won\'t be a big\nbenefit to using hiredis.\nIf you use Redis for big SUNION/SINTER/LRANGE/ZRANGE operations, the\nbenefit to using hiredis-node can be significant.\n\n[hiredis]: http://github.com/antirez/hiredis\n\n## Install\n\nInstall with [NPM][npm]:\n\n```\nnpm install hiredis\n```\n\n[npm]: https://npmjs.org/\n\n## Usage\n\nhiredis-node works out of the box with Matt Ranney\'s [node_redis][node_redis].\nThe latter has an optional dependency on hiredis-node, so maybe you\'re\nalready using it without knowing.\n\nAlternatively, you can use it directly:\n\n```javascript\nvar hiredis = require("hiredis"),\n    reader = new hiredis.Reader();\n\n// Data comes in\nreader.feed("$5\\r\\nhello\\r\\n");\n\n// Reply comes out\nreader.get() // => "hello"\n```\n\nInstead of returning strings for bulk payloads, it can also return\nbuffers:\n\n```javascript\nvar hiredis = require("hiredis"),\n    reader = new hiredis.Reader({ return_buffers: true });\n\n// Data comes in\nreader.feed("$5\\r\\nhello\\r\\n");\n\n// Reply comes out\nreader.get() // => <Buffer 68 65 6c 6c 6f>\n```\n\n[node_redis]: http://github.com/mranney/node_redis\n\n## License\n\nThis code is released under the BSD license, after the license of hiredis.\n',
+59 silly resolved     readmeFilename: 'README.md',
+59 silly resolved     _id: 'hiredis@0.1.15',
+59 silly resolved     _from: 'hiredis@~0.1.14' } ]
+60 info install hiredis@0.1.15 into c:\wamp\www\Inkpen
+61 info installOne hiredis@0.1.15
+62 verbose from cache C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package\package.json
+63 info c:\wamp\www\Inkpen\node_modules\hiredis unbuild
+64 verbose read json c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+65 verbose tar unpack C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package.tgz
+66 silly lockFile 1136967e--www-Inkpen-node-modules-hiredis c:\wamp\www\Inkpen\node_modules\hiredis
+67 verbose lock c:\wamp\www\Inkpen\node_modules\hiredis C:\Users\Kushagra\AppData\Roaming\npm-cache\1136967e--www-Inkpen-node-modules-hiredis.lock
+68 silly lockFile 74e54ae1-cache-hiredis-0-1-15-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package.tgz
+69 verbose lock C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package.tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\74e54ae1-cache-hiredis-0-1-15-package-tgz.lock
+70 silly gunzTarPerm modes [ '755', '644' ]
+71 silly gunzTarPerm extractEntry package.json
+72 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+73 silly gunzTarPerm extractEntry README.md
+74 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+75 silly gunzTarPerm extractEntry bench.js
+76 silly gunzTarPerm modified mode [ 'bench.js', 438, 420 ]
+77 silly gunzTarPerm extractEntry hiredis.js
+78 silly gunzTarPerm modified mode [ 'hiredis.js', 438, 420 ]
+79 silly gunzTarPerm extractEntry binding.gyp
+80 silly gunzTarPerm modified mode [ 'binding.gyp', 438, 420 ]
+81 silly gunzTarPerm extractEntry COPYING
+82 silly gunzTarPerm modified mode [ 'COPYING', 438, 420 ]
+83 silly gunzTarPerm extractEntry deps/hiredis/README.md
+84 silly gunzTarPerm modified mode [ 'deps/hiredis/README.md', 438, 420 ]
+85 silly gunzTarPerm extractEntry deps/hiredis/example.c
+86 silly gunzTarPerm modified mode [ 'deps/hiredis/example.c', 438, 420 ]
+87 silly gunzTarPerm extractEntry deps/hiredis/async.h
+88 silly gunzTarPerm modified mode [ 'deps/hiredis/async.h', 438, 420 ]
+89 silly gunzTarPerm extractEntry deps/hiredis/CHANGELOG.md
+90 silly gunzTarPerm modified mode [ 'deps/hiredis/CHANGELOG.md', 438, 420 ]
+91 silly gunzTarPerm extractEntry deps/hiredis/COPYING
+92 silly gunzTarPerm modified mode [ 'deps/hiredis/COPYING', 438, 420 ]
+93 silly gunzTarPerm extractEntry deps/hiredis/dict.c
+94 silly gunzTarPerm modified mode [ 'deps/hiredis/dict.c', 438, 420 ]
+95 silly gunzTarPerm extractEntry deps/hiredis/dict.h
+96 silly gunzTarPerm modified mode [ 'deps/hiredis/dict.h', 438, 420 ]
+97 silly gunzTarPerm extractEntry deps/hiredis/example-ae.c
+98 silly gunzTarPerm modified mode [ 'deps/hiredis/example-ae.c', 438, 420 ]
+99 silly gunzTarPerm extractEntry deps/hiredis/example-libev.c
+100 silly gunzTarPerm modified mode [ 'deps/hiredis/example-libev.c', 438, 420 ]
+101 silly gunzTarPerm extractEntry deps/hiredis/example-libevent.c
+102 silly gunzTarPerm modified mode [ 'deps/hiredis/example-libevent.c', 438, 420 ]
+103 silly gunzTarPerm extractEntry deps/hiredis/async.c
+104 silly gunzTarPerm modified mode [ 'deps/hiredis/async.c', 438, 420 ]
+105 silly gunzTarPerm extractEntry deps/hiredis/fmacros.h
+106 silly gunzTarPerm modified mode [ 'deps/hiredis/fmacros.h', 438, 420 ]
+107 silly gunzTarPerm extractEntry deps/hiredis/hiredis.c
+108 silly gunzTarPerm modified mode [ 'deps/hiredis/hiredis.c', 438, 420 ]
+109 silly gunzTarPerm extractEntry deps/hiredis/hiredis.h
+110 silly gunzTarPerm modified mode [ 'deps/hiredis/hiredis.h', 438, 420 ]
+111 silly gunzTarPerm extractEntry deps/hiredis/Makefile
+112 silly gunzTarPerm modified mode [ 'deps/hiredis/Makefile', 438, 420 ]
+113 silly gunzTarPerm extractEntry deps/hiredis/net.c
+114 silly gunzTarPerm modified mode [ 'deps/hiredis/net.c', 438, 420 ]
+115 silly gunzTarPerm extractEntry deps/hiredis/net.h
+116 silly gunzTarPerm modified mode [ 'deps/hiredis/net.h', 438, 420 ]
+117 silly gunzTarPerm extractEntry deps/hiredis/adapters/ae.h
+118 silly gunzTarPerm modified mode [ 'deps/hiredis/adapters/ae.h', 438, 420 ]
+119 silly gunzTarPerm extractEntry deps/hiredis/adapters/libev.h
+120 silly gunzTarPerm modified mode [ 'deps/hiredis/adapters/libev.h', 438, 420 ]
+121 silly gunzTarPerm extractEntry deps/hiredis/adapters/libevent.h
+122 silly gunzTarPerm modified mode [ 'deps/hiredis/adapters/libevent.h', 438, 420 ]
+123 silly gunzTarPerm extractEntry deps/hiredis/sds.c
+124 silly gunzTarPerm modified mode [ 'deps/hiredis/sds.c', 438, 420 ]
+125 silly gunzTarPerm extractEntry deps/hiredis/sds.h
+126 silly gunzTarPerm modified mode [ 'deps/hiredis/sds.h', 438, 420 ]
+127 silly gunzTarPerm extractEntry deps/hiredis/test.c
+128 silly gunzTarPerm modified mode [ 'deps/hiredis/test.c', 438, 420 ]
+129 silly gunzTarPerm extractEntry deps/hiredis.gyp
+130 silly gunzTarPerm modified mode [ 'deps/hiredis.gyp', 438, 420 ]
+131 silly gunzTarPerm extractEntry src/hiredis.cc
+132 silly gunzTarPerm modified mode [ 'src/hiredis.cc', 438, 420 ]
+133 silly gunzTarPerm extractEntry src/reader.cc
+134 silly gunzTarPerm modified mode [ 'src/reader.cc', 438, 420 ]
+135 silly gunzTarPerm extractEntry src/reader.h
+136 silly gunzTarPerm modified mode [ 'src/reader.h', 438, 420 ]
+137 silly gunzTarPerm extractEntry test/reader.js
+138 silly gunzTarPerm modified mode [ 'test/reader.js', 438, 420 ]
+139 verbose read json c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+140 silly lockFile 1136967e--www-Inkpen-node-modules-hiredis c:\wamp\www\Inkpen\node_modules\hiredis
+141 silly lockFile 1136967e--www-Inkpen-node-modules-hiredis c:\wamp\www\Inkpen\node_modules\hiredis
+142 silly lockFile 74e54ae1-cache-hiredis-0-1-15-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package.tgz
+143 silly lockFile 74e54ae1-cache-hiredis-0-1-15-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\hiredis\0.1.15\package.tgz
+144 info preinstall hiredis@0.1.15
+145 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+146 verbose readDependencies using package.json deps
+147 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+148 verbose readDependencies using package.json deps
+149 verbose cache add [ 'bindings@*', null ]
+150 verbose cache add name=undefined spec="bindings@*" args=["bindings@*",null]
+151 verbose parsed url { protocol: null,
+151 verbose parsed url   slashes: null,
+151 verbose parsed url   auth: null,
+151 verbose parsed url   host: null,
+151 verbose parsed url   port: null,
+151 verbose parsed url   hostname: null,
+151 verbose parsed url   hash: null,
+151 verbose parsed url   search: null,
+151 verbose parsed url   query: null,
+151 verbose parsed url   pathname: 'bindings@*',
+151 verbose parsed url   path: 'bindings@*',
+151 verbose parsed url   href: 'bindings@*' }
+152 verbose cache add name="bindings" spec="*" args=["bindings","*"]
+153 verbose parsed url { protocol: null,
+153 verbose parsed url   slashes: null,
+153 verbose parsed url   auth: null,
+153 verbose parsed url   host: null,
+153 verbose parsed url   port: null,
+153 verbose parsed url   hostname: null,
+153 verbose parsed url   hash: null,
+153 verbose parsed url   search: null,
+153 verbose parsed url   query: null,
+153 verbose parsed url   pathname: '*',
+153 verbose parsed url   path: '*',
+153 verbose parsed url   href: '*' }
+154 verbose addNamed [ 'bindings', '*' ]
+155 verbose addNamed [ null, '' ]
+156 silly lockFile a3858fc2-bindings bindings@*
+157 verbose lock bindings@* C:\Users\Kushagra\AppData\Roaming\npm-cache\a3858fc2-bindings.lock
+158 silly addNameRange { name: 'bindings', range: '', hasData: false }
+159 verbose url raw bindings
+160 verbose url resolving [ 'https://registry.npmjs.org/', './bindings' ]
+161 verbose url resolved https://registry.npmjs.org/bindings
+162 info trying registry request attempt 1 at 22:32:07
+163 verbose etag "CFVJVT1GCZS3UUVQEXZASBJH7"
+164 http GET https://registry.npmjs.org/bindings
+165 http 304 https://registry.npmjs.org/bindings
+166 silly registry.get cb [ 304,
+166 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+166 silly registry.get     etag: '"CFVJVT1GCZS3UUVQEXZASBJH7"',
+166 silly registry.get     date: 'Wed, 29 May 2013 17:02:16 GMT',
+166 silly registry.get     'content-length': '0' } ]
+167 verbose etag bindings from cache
+168 silly addNameRange number 2 { name: 'bindings', range: '', hasData: true }
+169 silly addNameRange versions [ 'bindings',
+169 silly addNameRange   [ '0.0.1',
+169 silly addNameRange     '0.1.0',
+169 silly addNameRange     '0.1.1',
+169 silly addNameRange     '0.2.0',
+169 silly addNameRange     '0.2.1',
+169 silly addNameRange     '0.2.2',
+169 silly addNameRange     '0.2.3',
+169 silly addNameRange     '0.2.4',
+169 silly addNameRange     '0.3.0',
+169 silly addNameRange     '0.4.0',
+169 silly addNameRange     '1.0.0',
+169 silly addNameRange     '1.1.0' ] ]
+170 verbose addNamed [ 'bindings', '1.1.0' ]
+171 verbose addNamed [ '1.1.0', '1.1.0' ]
+172 silly lockFile ff2d1960-bindings-1-1-0 bindings@1.1.0
+173 verbose lock bindings@1.1.0 C:\Users\Kushagra\AppData\Roaming\npm-cache\ff2d1960-bindings-1-1-0.lock
+174 verbose read json C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package\package.json
+175 silly lockFile ff2d1960-bindings-1-1-0 bindings@1.1.0
+176 silly lockFile ff2d1960-bindings-1-1-0 bindings@1.1.0
+177 silly lockFile a3858fc2-bindings bindings@*
+178 silly lockFile a3858fc2-bindings bindings@*
+179 silly resolved [ { name: 'bindings',
+179 silly resolved     description: 'Helper module for loading your native module\'s .node file',
+179 silly resolved     keywords: [ 'native', 'addon', 'bindings', 'gyp', 'waf', 'c', 'c++' ],
+179 silly resolved     version: '1.1.0',
+179 silly resolved     author:
+179 silly resolved      { name: 'Nathan Rajlich',
+179 silly resolved        email: 'nathan@tootallnate.net',
+179 silly resolved        url: 'http://tootallnate.net' },
+179 silly resolved     repository:
+179 silly resolved      { type: 'git',
+179 silly resolved        url: 'git://github.com/TooTallNate/node-bindings.git' },
+179 silly resolved     main: './bindings.js',
+179 silly resolved     readme: 'node-bindings\n=============\n### Helper module for loading your native module\'s .node file\n\nThis is a helper module for authors of Node.js native addon modules.\nIt is basically the "swiss army knife" of `require()`ing your native module\'s\n`.node` file.\n\nThroughout the course of Node\'s native addon history, addons have ended up being\ncompiled in a variety of different places, depending on which build tool and which\nversion of node was used. To make matters worse, now the _gyp_ build tool can\nproduce either a _Release_ or _Debug_ build, each being built into different\nlocations.\n\nThis module checks _all_ the possible locations that a native addon would be built\nat, and returns the first one that loads successfully.\n\n\nInstallation\n------------\n\nInstall with `npm`:\n\n``` bash\n$ npm install bindings\n```\n\nOr add it to the `"dependencies"` section of your _package.json_ file.\n\n\nExample\n-------\n\n`require()`ing the proper bindings file for the current node version, platform\nand architecture is as simple as:\n\n``` js\nvar bindings = require(\'bindings\')(\'binding.node\')\n\n// Use your bindings defined in your C files\nbindings.your_c_function()\n```\n\n\nNice Error Output\n-----------------\n\nWhen the `.node` file could not be loaded, `node-bindings` throws an Error with\na nice error message telling you exactly what was tried. You can also check the\n`err.tries` Array property.\n\n```\nError: Could not load the bindings file. Tried:\n → /Users/nrajlich/ref/build/binding.node\n → /Users/nrajlich/ref/build/Debug/binding.node\n → /Users/nrajlich/ref/build/Release/binding.node\n → /Users/nrajlich/ref/out/Debug/binding.node\n → /Users/nrajlich/ref/Debug/binding.node\n → /Users/nrajlich/ref/out/Release/binding.node\n → /Users/nrajlich/ref/Release/binding.node\n → /Users/nrajlich/ref/build/default/binding.node\n → /Users/nrajlich/ref/compiled/0.8.2/darwin/x64/binding.node\n    at bindings (/Users/nrajlich/ref/node_modules/bindings/bindings.js:84:13)\n    at Object.<anonymous> (/Users/nrajlich/ref/lib/ref.js:5:47)\n    at Module._compile (module.js:449:26)\n    at Object.Module._extensions..js (module.js:467:10)\n    at Module.load (module.js:356:32)\n    at Function.Module._load (module.js:312:12)\n    ...\n```\n\n\nLicense\n-------\n\n(The MIT License)\n\nCopyright (c) 2012 Nathan Rajlich &lt;nathan@tootallnate.net&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+179 silly resolved     readmeFilename: 'README.md',
+179 silly resolved     _id: 'bindings@1.1.0',
+179 silly resolved     _from: 'bindings@*' } ]
+180 info install bindings@1.1.0 into c:\wamp\www\Inkpen\node_modules\hiredis
+181 info installOne bindings@1.1.0
+182 verbose from cache C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package\package.json
+183 info c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings unbuild
+184 verbose read json c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings\package.json
+185 verbose tar unpack C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package.tgz
+186 silly lockFile d4ca8173-es-hiredis-node-modules-bindings c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings
+187 verbose lock c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings C:\Users\Kushagra\AppData\Roaming\npm-cache\d4ca8173-es-hiredis-node-modules-bindings.lock
+188 silly lockFile 80b06976-cache-bindings-1-1-0-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package.tgz
+189 verbose lock C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package.tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\80b06976-cache-bindings-1-1-0-package-tgz.lock
+190 silly gunzTarPerm modes [ '755', '644' ]
+191 silly gunzTarPerm extractEntry package.json
+192 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+193 silly gunzTarPerm extractEntry README.md
+194 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+195 silly gunzTarPerm extractEntry bindings.js
+196 silly gunzTarPerm modified mode [ 'bindings.js', 438, 420 ]
+197 verbose read json c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings\package.json
+198 silly lockFile d4ca8173-es-hiredis-node-modules-bindings c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings
+199 silly lockFile d4ca8173-es-hiredis-node-modules-bindings c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings
+200 silly lockFile 80b06976-cache-bindings-1-1-0-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package.tgz
+201 silly lockFile 80b06976-cache-bindings-1-1-0-package-tgz C:\Users\Kushagra\AppData\Roaming\npm-cache\bindings\1.1.0\package.tgz
+202 info preinstall bindings@1.1.0
+203 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings\package.json
+204 verbose readDependencies using package.json deps
+205 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings\package.json
+206 verbose readDependencies using package.json deps
+207 silly resolved []
+208 verbose about to build c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings
+209 info build c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings
+210 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\node_modules\bindings\package.json
+211 verbose linkStuff [ false,
+211 verbose linkStuff   false,
+211 verbose linkStuff   false,
+211 verbose linkStuff   'c:\\wamp\\www\\Inkpen\\node_modules\\hiredis\\node_modules' ]
+212 info linkStuff bindings@1.1.0
+213 verbose linkBins bindings@1.1.0
+214 verbose linkMans bindings@1.1.0
+215 verbose rebuildBundles bindings@1.1.0
+216 info install bindings@1.1.0
+217 info postinstall bindings@1.1.0
+218 verbose about to build c:\wamp\www\Inkpen\node_modules\hiredis
+219 info build c:\wamp\www\Inkpen\node_modules\hiredis
+220 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+221 verbose linkStuff [ false, false, false, 'c:\\wamp\\www\\Inkpen\\node_modules' ]
+222 info linkStuff hiredis@0.1.15
+223 verbose linkBins hiredis@0.1.15
+224 verbose linkMans hiredis@0.1.15
+225 verbose rebuildBundles hiredis@0.1.15
+226 verbose rebuildBundles [ 'bindings' ]
+227 info install hiredis@0.1.15
+228 verbose unsafe-perm in lifecycle true
+229 silly exec cmd "/c" "node-gyp rebuild"
+230 silly cmd,/c,node-gyp rebuild,c:\wamp\www\Inkpen\node_modules\hiredis spawning
+231 info hiredis@0.1.15 Failed to exec install script
+232 info c:\wamp\www\Inkpen\node_modules\hiredis unbuild
+233 verbose from cache c:\wamp\www\Inkpen\node_modules\hiredis\package.json
+234 info preuninstall hiredis@0.1.15
+235 info uninstall hiredis@0.1.15
+236 verbose true,c:\wamp\www\Inkpen\node_modules,c:\wamp\www\Inkpen\node_modules unbuild hiredis@0.1.15
+237 info postuninstall hiredis@0.1.15
+238 error hiredis@0.1.15 install: `node-gyp rebuild`
+238 error `cmd "/c" "node-gyp rebuild"` failed with 1
+239 error Failed at the hiredis@0.1.15 install script.
+239 error This is most likely a problem with the hiredis package,
+239 error not with npm itself.
+239 error Tell the author that this fails on your system:
+239 error     node-gyp rebuild
+239 error You can get their info via:
+239 error     npm owner ls hiredis
+239 error There is likely additional logging output above.
+240 error System Windows_NT 6.2.9200
+241 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+242 error cwd c:\wamp\www\Inkpen
+243 error node -v v0.10.5
+244 error npm -v 1.2.18
+245 error code ELIFECYCLE
+246 verbose exit [ 1, true ]
