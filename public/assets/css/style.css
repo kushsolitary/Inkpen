@@ -95,6 +95,7 @@ Settings
 */
 
 .settings {
+	opacity: 0.5;
 	position: absolute;
 	top: 0;
 	left: 45px;
@@ -189,6 +190,7 @@ Profile
 	position: absolute;
 	right: 8px; top: 8px;
 	opacity: 0.5;
+	transition: all 0.3s ease;
 }
 
 #profile img, #profile i {
@@ -367,7 +369,9 @@ About
 Toggle
 ------
 */
-
+.toggle {
+	opacity: 0.5;	
+}
 #toggle {display: none;}
 #toggle:checked ~ .toggle{
 	left: 300px;

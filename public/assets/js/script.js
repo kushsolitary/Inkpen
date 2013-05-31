@@ -306,6 +306,25 @@ document.addEventListener("keydown", function(e) {
 
 }, false);
 
+// Hide the settings when scrolled down
+$("#text").scroll(function() {
+	var pos = $(this).scrollTop();
+	// console.log(pos);
+
+	var toHide = $(".settings, .toggle, #profile");
+	if(pos > 50)
+		toHide.css({
+			"opacity": 0,
+			"visibility": "hidden"
+		});
+	else
+		toHide.css({
+			"opacity": 0.5,
+			"visibility": "visible"
+		});
+
+});
+
 // More/Less links in recent writeups
 $("ul.writes li").each(function(i) {
 	if(i>4)
