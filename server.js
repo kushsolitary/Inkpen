@@ -2,6 +2,9 @@ var express = require('express')
   , app = express()
   , RedisStore = require('connect-redis')(express);
 
+moment = require('moment');
+moment().format();
+
 // Assets Path
 app.use(express.static(__dirname + '/public/assets'));
 app.set('views', __dirname + '/app/views');
@@ -52,8 +55,9 @@ createConnection = function() {
 
 // Create tables
 var db = createConnection();
-db.execute("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), fullname VARCHAR(50), profile_image VARCHAR(100), is_pro VARCHAR(10), created_at DATETIME)");
+db.execute("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), fullname VARCHAR(50), profile_image text, is_pro VARCHAR(10), created_at DATETIME)");
 db.execute("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, summary VARCHAR(40), created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME, modified_at DATETIME)");
+// db.execute("CREATE TABLE IF NOT EXISTS gists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, url TEXT, created_by VARCHAR(20), created_at DATETIME)");
 db.close();
 
 
@@ -67,7 +71,7 @@ function twoDigits(d) {
 }
 
 Date.prototype.toMysqlFormat = function() {
-  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate()) + " " + twoDigits(this.getHours()) + ":" + twoDigits(this.getMinutes()) + ":" + twoDigits(this.getSeconds());
 };
 
 
@@ -87,6 +91,7 @@ app.get('/edit/:key', writeC.edit);
 app.post('/write/save', writeC.save);
 app.post('/write/update', writeC.update);
 app.post('/write/delete', writeC.remove);
+// app.post('/write/gist', writeC.saveAsGist);
 
 // Tmp Favicon Fallback
 app.get('/favicon.ico', function(req, res) {

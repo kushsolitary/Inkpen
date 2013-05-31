@@ -9,7 +9,8 @@
     "oauth": "~0.9.8",
     "connect-redis": "~1.4.5",
     "mysql-native": "*",
-    "forever": "*"
+    "forever": "*",
+    "moment": "*"
   },
   "engines": {
     "node": "*",

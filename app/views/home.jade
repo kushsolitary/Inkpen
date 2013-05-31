@@ -15,12 +15,13 @@ html(lang="en")
     .settings
       a#muteBtn(href="javascript: void(0)")
         i.icon-volume-up
-
       a#fsBtn(href="javascript: void(0)")
         i.icon-fullscreen
-
       a#thmBtn(href="javascript: void(0)")
         i.icon-adjust
+
+      // a#gistBtn(href="javascript: void(0)")
+        i.icon-github
 
     #about
       a(href="/")
@@ -38,12 +39,20 @@ html(lang="en")
       else
         p   
           if writes.length > 0
-            | You have saved #{writes.length} write-ups. Here are some of them:
+            if writes.length == 1
+              | You have saved #{writes.length} write-up. Here it is:
+
+            else if writes.length > 1 && writes.length <= 5 
+              | You have saved #{writes.length} write-ups. Here are they:
+
+            else if writes.length > 5
+              | You have saved #{writes.length} write-ups. Here are some of them:
 
             ul.writes
               each item, i in writes
-                li #{i+1})    
+                li #{i+1}.    
                   a(href="/view/#{item[0]}") #{item[1]}
+                  p.time #{item[2]}
           else
             | Seems like haven't saved anything yet. Try Ctrl+S (or ⌘+S) to
             | save/update your post on the server!
@@ -51,6 +60,7 @@ html(lang="en")
           if writes.length > 5
             a.more(href="javascript: void(0)") See More
 
+        //p Here are some of your saved gists
       h3 Information
 
       p

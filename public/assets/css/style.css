@@ -312,11 +312,11 @@ About
 }
 
 #about {
-	width: 350px;
+	width: 400px;
 	height: 100%;
 	background: #0e0e0e;
 	position: absolute;
-	left: -350px;
+	left: -400px;
 	top: 0;
 	transition: all .3s ease;
 
@@ -357,13 +357,25 @@ About
 }
 
 #about ul.writes li {
-	display: block;
 	color: #555;
+	position: relative;
+}
+
+#about ul.writes li a{
+	display: inline-block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	width: 170px;
 }
 
+#about ul.writes li .time {
+	display: inline;
+	text-align: right;
+	float: right;
+	margin: 0;
+	padding: 0;
+}
 
 /*
 Toggle
@@ -374,7 +386,7 @@ Toggle
 }
 #toggle {display: none;}
 #toggle:checked ~ .toggle{
-	left: 300px;
+	left: 350px;
 	background: #000;
 }
 
@@ -382,8 +394,8 @@ Toggle
 .light .toggle:hover {	background-color: rgba(0, 0, 0, 0.1); }
 
 #toggle:checked ~ #about{ left: -50px; }
-#toggle:checked ~ #write > #text{ padding-left: 350px; }
-#toggle:checked ~ .settings {left: 350px;}
+#toggle:checked ~ #write > #text{ padding-left: 400px; }
+#toggle:checked ~ .settings {left: 400px;}
 
 .toggle {
 	position: absolute;

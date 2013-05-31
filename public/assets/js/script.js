@@ -325,6 +325,40 @@ $("#text").scroll(function() {
 
 });
 
+/*
+// Save as gist
+$("#gistBtn").click(function() {
+	var content = $("#text").val()
+		,	data = 	{
+				"description": "Created using Inkpen - http://inkpen.in",
+				"public": true,
+				"files": {
+					"file.md": {
+						"content": content
+					}
+				}
+			};
+
+	notify("Saving as gist...", 'working')
+
+	if(content != '') {
+		$.post(
+			'https://api.github.com/gists',
+			JSON.stringify(data),
+			function(data) {
+				// console.log(data);
+				notify("Saved successfully. Here's the URL: " + data.html_url, "success");
+			},
+			'json'
+		).fail(function(err) {
+			notify("Error " + err.status + ": " + err.statusText, 'failure');
+		})
+	}
+	else
+		notify("Can't save an empty document. Please write something first", 'failure')
+});
+*/
+
 // More/Less links in recent writeups
 $("ul.writes li").each(function(i) {
 	if(i>4)
@@ -351,7 +385,8 @@ function notify(msg, status) {
 		"opacity": 1
 	});
 
-	remove_notify();
+	if(!ele.hasClass('working'))
+		remove_notify();
 }
 
 // Remove notify

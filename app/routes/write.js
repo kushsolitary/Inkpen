@@ -67,10 +67,17 @@ exports.edit = function(req, res) {
         , profile_image = (req.session.profile_image) ? req.session.profile_image : 'guest'
         , fullname = (req.session.fullname) ? req.session.fullname : 'guest';
 
-      console.log(username);
+      // console.log(username);
 
       db = createConnection();
-      db.execute("SELECT slug, summary FROM writes WHERE created_by = ?", [username]).on('end', function(r) {
+      db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? ORDER BY created_at DESC", 
+        [username]
+      ).on('end', function(r) {
+        r.result.rows.forEach(function(r, i) {
+          // console.log(moment(r[2]).fromNow(true));
+          r[2] = moment(r[2]).fromNow(true);
+        });
+
         var writes = r.result.rows;
 
         res.render('home', {
@@ -128,7 +135,24 @@ exports.save = function(req, res) {
   }
 
   regenerate();
-}
+};
+
+// Save as gist controller
+/*
+exports.saveAsGist = function(req, res) {
+  var url = req.body.url
+    , created_at = new Date().toMysqlFormat()
+    , created_by = (req.session.username) ? req.session.username : 'guest';
+
+    db = createConnection();
+    db.execute("INSERT INTO gists (url, created_at, created_by) VALUES (?, ?, ?)",
+      [url, created_at, created_by]
+    )
+    .on('end', function(r) {
+
+    });
+};
+*/
 
 // Update controller
 exports.update = function(req, res) {
@@ -190,7 +214,7 @@ exports.update = function(req, res) {
   });
 
   db.close();
-}
+};
 
 // Delete controller
 exports.remove = function(req, res) {
@@ -230,4 +254,4 @@ exports.remove = function(req, res) {
       status: 'failure',
       msg: 'Please sign in if you want to delete your write-ups.'
     });
-}
+};

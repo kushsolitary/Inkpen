@@ -9,13 +9,20 @@ exports.show = function(req, res) {
 
   // Get the writes created by the current user
   db = createConnection();
-  db.query("SELECT slug, summary FROM writes WHERE created_by = '" + escape(username) + "'").on('end', function(r) {
-    writes = r.result.rows;
+  db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? ORDER BY created_at DESC", 
+    [username]
+  ).on('end', function(r) {
+    r.result.rows.forEach(function(r, i) {
+      // console.log(moment(r[2]).fromNow(true));
+      r[2] = moment(r[2]).fromNow(true);
+    });
+
+    var writes = r.result.rows;
 
     res.render('home', {
       data: data, 
-      username : username, 
-      profile_image: profile_image, 
+      username: username,
+      profile_image: profile_image,
       fullname: fullname,
       writes: writes
     });
