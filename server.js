@@ -100,7 +100,9 @@ app.get('/favicon.ico', function(req, res) {
 
 
 // -----
-// Twitter oAuth
+// oAuth
 // -----
 app.get('/auth/twitter', oAuthC.twitter);
 app.get('/auth/twitter/callback', oAuthC.twitCallback);
+app.get('/auth/github', oAuthC.github);
+app.get('/auth/github/callback', oAuthC.gitCallback);

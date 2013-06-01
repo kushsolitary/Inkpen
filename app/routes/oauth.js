@@ -1,6 +1,88 @@
 var OAuth = require('oauth').OAuth;
 var oauth;
 
+// Github oAuth controller
+exports.github = function(req, res) {
+  var host = req.headers.host
+    , url = "https://github.com/login/oauth/authorize/?client_id=3932296283f3a71ed5be&scope=gist";
+
+  res.redirect(url);
+
+  /*
+  oauth = new OAuth(
+    "https://github.com/login/oauth/authorize",
+    "https://github.com/login/oauth/access_token",
+    "3932296283f3a71ed5be",
+    "1709ded56fa2224ac4950f9b32f11040d13be81c",
+    "1.0a",
+    "http://" + host + "/auth/github/callback",
+    "HMAC-SHA1"
+  );
+
+  oauth.getOAuthRequestToken({"scope": "gist"}, function(error, oauth_token, oauth_token_secret, results) {
+    if (error) {
+      console.log(error);
+      res.send("Authentication Failed!");
+    }
+    else {
+      req.session.oauth = {
+        token: oauth_token,
+        token_secret: oauth_token_secret
+      };
+      console.log(req.session.oauth);
+      res.redirect('https://github.com/login/oauth/authenticate?oauth_token='+oauth_token)
+    }
+  });
+
+*/
+};
+
+exports.gitCallback = function(req, res, next) {
+  var code = req.query.code
+    , data = {
+        "client_id": "3932296283f3a71ed5be",
+        "client_secret": "1709ded56fa2224ac4950f9b32f11040d13be81c",
+      };
+
+    var qs = require('querystring');
+    req.session.oauth = {};
+
+  // Get the access token with the code
+  var request = require('request');
+  request.post(
+    "https://github.com/login/oauth/access_token?client_id=" + data.client_id + "&client_secret="+data.client_secret+"&code="+code ,
+    function(e, r, body) {
+      if (e) {
+        console.log(error);
+        res.send("Authentication Failure!");
+      }
+      else{
+        var body = qs.parse(body);
+
+        req.session.oauth.access_token = body.access_token;
+        var url = "https://api.github.com/user?access_token=" + req.session.oauth.access_token;
+        // console.log(url);
+
+        // Get user data
+        // res.redirect(url);
+        request({
+          method: 'GET', 
+          uri: url,
+          headers: {
+            'user-agent': "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)"
+          }
+        },
+          function (error, response, body) {
+            // console.log(body);
+            // Let's save the data
+          }
+        );
+        // res.redirect('/');
+      }
+    }
+  );
+};
+
 // Twitter oAuth controller
 exports.twitter = function(req, res) {
   var host = req.headers.host;
