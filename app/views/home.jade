@@ -19,8 +19,7 @@ html(lang="en")
         i.icon-fullscreen
       a#thmBtn(href="javascript: void(0)")
         i.icon-adjust
-
-      // a#gistBtn(href="javascript: void(0)")
+      a#gistBtn(href="javascript: void(0)")
         i.icon-github
 
     #about
@@ -34,7 +33,11 @@ html(lang="en")
           a(href="/logout")  - Logout
 
       if username == 'guest'
-        a(href="/auth/twitter") Twitter
+        p
+          a(href="/auth/twitter") Twitter 
+          br
+          a(href="/auth/github") Github
+          |  (Save as Gist)
         p
       else
         p   

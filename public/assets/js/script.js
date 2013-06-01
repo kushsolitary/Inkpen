@@ -325,7 +325,7 @@ $("#text").scroll(function() {
 
 });
 
-/*
+
 // Save as gist
 $("#gistBtn").click(function() {
 	var content = $("#text").val()
@@ -341,9 +341,16 @@ $("#gistBtn").click(function() {
 
 	notify("Saving as gist...", 'working')
 
+	console.log(window.token);
+
+	if(window.token == 'undefined')
+		var url = "https://api.github.com/gists";
+	else
+		var url = "https://api.github.com/gists?access_token=" + window.token;
+
 	if(content != '') {
 		$.post(
-			'https://api.github.com/gists',
+			url,
 			JSON.stringify(data),
 			function(data) {
 				// console.log(data);
@@ -357,7 +364,7 @@ $("#gistBtn").click(function() {
 	else
 		notify("Can't save an empty document. Please write something first", 'failure')
 });
-*/
+
 
 // More/Less links in recent writeups
 $("ul.writes li").each(function(i) {

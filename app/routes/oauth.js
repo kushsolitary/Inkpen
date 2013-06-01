@@ -42,13 +42,13 @@ exports.gitCallback = function(req, res, next) {
     , data = {
         "client_id": "3932296283f3a71ed5be",
         "client_secret": "1709ded56fa2224ac4950f9b32f11040d13be81c",
-      };
+      }
+    , qs = require('querystring')
+    , request = require('request');
 
-    var qs = require('querystring');
     req.session.oauth = {};
 
   // Get the access token with the code
-  var request = require('request');
   request.post(
     "https://github.com/login/oauth/access_token?client_id=" + data.client_id + "&client_secret="+data.client_secret+"&code="+code ,
     function(e, r, body) {
@@ -59,25 +59,61 @@ exports.gitCallback = function(req, res, next) {
       else{
         var body = qs.parse(body);
 
-        req.session.oauth.access_token = body.access_token;
-        var url = "https://api.github.com/user?access_token=" + req.session.oauth.access_token;
-        // console.log(url);
+        req.session.access_token = body.access_token;
+        var url = "https://api.github.com/user?access_token=" + req.session.access_token;
 
         // Get user data
-        // res.redirect(url);
         request({
-          method: 'GET', 
-          uri: url,
-          headers: {
-            'user-agent': "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)"
-          }
-        },
+            method: 'GET', 
+            uri: url,
+            headers: {
+              'user-agent': "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)"
+            }
+          },
           function (error, response, body) {
-            // console.log(body);
             // Let's save the data
+            body = JSON.parse(body);
+            req.session.profile_image = body.avatar_url;
+            req.session.username = body.login;
+            req.session.fullname = body.name;
+            req.session.authType = 'github';
+
+            // Put things in db
+            db = createConnection();
+            db.execute("SELECT id FROM users WHERE username = ?", [req.session.username]).on('end', function(r) {
+              var exists = (r.result.rows.length == 0) ? false : true;
+
+              if(exists) {
+                db = createConnection();
+
+                // Update full name and profile image
+                db.execute("UPDATE users SET fullname = ?, profile_image = ? WHERE username = ?", 
+                  [req.session.fullname, req.session.profile_image, req.session.username]
+                ).on('end', function(r) {
+                  // And get the user data from DB
+                  db.execute("SELECT profile_image, fullname FROM users WHERE username = ?", 
+                    [req.session.username]
+                  ).on('end', function(r) {
+                    req.session.profile_image = r.result.rows[0][0];
+                    req.session.fullname = r.result.rows[0][1];
+
+                    res.redirect('/');
+                  });
+                });
+              }
+
+              // Else create a new user and redirect to home page
+              else {
+                db = createConnection();
+                db.execute("INSERT INTO users (username, created_at, is_pro, fullname, profile_image) VALUES (?, ?, ?, ?, ?)", 
+                  [req.session.username, new Date().toMysqlFormat(), "no", req.session.fullname, req.session.profile_image]
+                ).on('end', function(r) {
+                  res.redirect('/');
+                });
+              }
+            });
           }
         );
-        // res.redirect('/');
       }
     }
   );
@@ -131,6 +167,7 @@ exports.twitCallback = function(req, res, next) {
           req.session.oauth.access_token = oauth_access_token;
           req.session.oauth.access_token_secret = oauth_access_token_secret;
           req.session.username = results.screen_name;
+          req.session.authType = 'twiter';
           // console.log(results, req.session.oauth);
 
           // Save in DB

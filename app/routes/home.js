@@ -3,7 +3,8 @@ exports.show = function(req, res) {
   var data = {}
     , username = (req.session.username) ? req.session.username : 'guest'
     , profile_image = (req.session.profile_image) ? req.session.profile_image : 'guest'
-    , fullname = (req.session.fullname) ? req.session.fullname : 'guest';
+    , fullname = (req.session.fullname) ? req.session.fullname : 'guest'
+    , token = (req.session.access_token) ? (req.session.access_token) : 'undefined';
 
   var writes = [];
 
@@ -24,6 +25,7 @@ exports.show = function(req, res) {
       username: username,
       profile_image: profile_image,
       fullname: fullname,
+      token: token,
       writes: writes
     });
   });
