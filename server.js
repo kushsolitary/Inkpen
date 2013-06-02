@@ -34,7 +34,7 @@ app.use(function(err, req, res, next) {
 });
 
 // Launch Main App
-app.listen(80, function(port) {
+app.listen(8080, function(port) {
   // console.log("Server started on localhost: 8080");
 });
 
