@@ -319,7 +319,7 @@ $("#text").scroll(function() {
 		});
 	else
 		toHide.css({
-			"opacity": 0.5,
+			"opacity": 1,
 			"visibility": "visible"
 		});
 

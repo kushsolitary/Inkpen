@@ -95,7 +95,7 @@ Settings
 */
 
 .settings {
-	opacity: 0.5;
+	opacity: 1;
 	position: absolute;
 	top: 0;
 	left: 45px;
@@ -198,18 +198,13 @@ Profile
 	width: 40px;
 	text-align: center;
 	line-height: 40px;
-	color: #aaa;
+	color: #555;
 	font-size: 20px;
 	border-radius: 3px;
-	background: #333;
+	background: #252525;
 	text-decoration: none;
 	margin-left: 8px;
-	opacity: 0.5;
 	transition: all 0.3s ease;
-}
-
-#profile img:hover, #profile i:hover {
-	opacity: 1;
 }
 
 #profile a {
@@ -383,9 +378,7 @@ About
 Toggle
 ------
 */
-.toggle {
-	opacity: 0.5;	
-}
+
 #toggle {display: none;}
 #toggle:checked ~ .toggle{
 	left: 350px;
