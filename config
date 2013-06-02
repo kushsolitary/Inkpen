@@ -1,8 +1,0 @@
-var config = {}
-
-config.twitter_client_id = "3H9mJB3pfIgrnu4v6WKWg";
-config.twitter_client_secret = "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU";
-config.github_client_id = "3932296283f3a71ed5be";
-config.github_client_secret = "1709ded56fa2224ac4950f9b32f11040d13be81c";
-
-module.exports = config;
