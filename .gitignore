@@ -166,5 +166,5 @@ pip-log.txt
 
 
 node_modules
-config.json
+config
 dump.rdb
