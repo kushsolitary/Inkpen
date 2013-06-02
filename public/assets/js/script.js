@@ -333,7 +333,7 @@ $("#gistBtn").click(function() {
 				"description": "Created using Inkpen - http://inkpen.in",
 				"public": true,
 				"files": {
-					"file.md": {
+					"inkpen.md": {
 						"content": content
 					}
 				}
@@ -354,7 +354,8 @@ $("#gistBtn").click(function() {
 			JSON.stringify(data),
 			function(data) {
 				// console.log(data);
-				notify("Saved successfully. Here's the URL: " + data.html_url, "success");
+				notify("Saved successfully.", "success");
+				copyToClipboard("Saved successfully. Copy the link by pressing Ctrl/Cmd + C", data.html_url);
 			},
 			'json'
 		).fail(function(err) {
@@ -365,6 +366,10 @@ $("#gistBtn").click(function() {
 		notify("Can't save an empty document. Please write something first", 'failure')
 });
 
+// Copy to clipboard
+function copyToClipboard (msg, url) {
+  window.prompt(msg, url);
+}
 
 // More/Less links in recent writeups
 $("ul.writes li").each(function(i) {
