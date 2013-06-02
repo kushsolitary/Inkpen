@@ -14,8 +14,12 @@ html(lang="en")
       .post!= data.content
         if data.created_by != "guest"
           .post_info
-            a(href="http://twitter.com/#{data.created_by}", target="_blank") 
-              .author(style="background-image: url(#{data.profile_image})")
+            if data.user_type == 'twitter'
+              a(href="http://twitter.com/#{data.created_by}", target="_blank") 
+                .author(style="background-image: url(#{data.profile_image})")
+            else if data.user_type == 'github'
+              a(href="http://github.com/#{data.created_by}", target="_blank") 
+                .author(style="background-image: url(#{data.profile_image})")
 
     include includes/foot
     script

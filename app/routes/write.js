@@ -27,17 +27,18 @@ exports.view = function(req, res) {
     , token = (req.session.access_token) ? (req.session.access_token) : 'undefined';
 
   db = createConnection();
-  db.execute("SELECT content, created_by FROM writes WHERE slug = ?", [data.key]).on('end', function(r) {
+  db.execute("SELECT content, created_by, user_type FROM writes WHERE slug = ?", [data.key]).on('end', function(r) {
     if(r.result.rows.length > 0 ) {
       data.content = unescape(r.result.rows[0][0]);
       data.content = converter.makeHtml(data.content);
 
       data.created_by = r.result.rows[0][1];
+      data.user_type = r.result.rows[0][2];
 
       if(data.created_by !== 'guest') {
         db = createConnection();
 
-        db.execute("SELECT profile_image, fullname FROM users WHERE username = ?", [data.created_by]).on('end', function(r) {
+        db.execute("SELECT profile_image, fullname FROM users WHERE username = ? AND type = ?", [data.created_by, data.user_type]).on('end', function(r) {
           data.profile_image = r.result.rows[0][0];
           data.fullname = r.result.rows[0][1];
 
