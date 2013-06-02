@@ -1,6 +1,6 @@
 var OAuth = require('oauth').OAuth
   , oauth
-  , config = require('./config');
+  , config = require('../../config');
 
 // Github oAuth controller
 exports.github = function(req, res) {

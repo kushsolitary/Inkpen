@@ -339,7 +339,7 @@ $("#gistBtn").click(function() {
 				}
 			};
 
-	notify("Saving as gist...", 'working')
+	notify("Uploading to Gihub as gist...", 'working')
 
 	console.log(window.token);
 
@@ -354,8 +354,8 @@ $("#gistBtn").click(function() {
 			JSON.stringify(data),
 			function(data) {
 				// console.log(data);
-				notify("Saved successfully.", "success");
-				copyToClipboard("Saved successfully. Copy the link by pressing Ctrl/Cmd + C", data.html_url);
+				notify("Uploaded successfully.", "success");
+				copyToClipboard("Uploaded successfully. Copy the link by pressing Ctrl/Cmd + C", data.html_url);
 			},
 			'json'
 		).fail(function(err) {
