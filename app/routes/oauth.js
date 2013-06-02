@@ -1,47 +1,21 @@
-var OAuth = require('oauth').OAuth;
-var oauth;
+var OAuth = require('oauth').OAuth
+  , oauth
+  , config = require('./config');
 
 // Github oAuth controller
 exports.github = function(req, res) {
   var host = req.headers.host
-    , url = "https://github.com/login/oauth/authorize/?client_id=3932296283f3a71ed5be&scope=gist";
+    , url = "https://github.com/login/oauth/authorize/?client_id=" + config.github_client_id + "&scope=gist";
 
   res.redirect(url);
 
-  /*
-  oauth = new OAuth(
-    "https://github.com/login/oauth/authorize",
-    "https://github.com/login/oauth/access_token",
-    "3932296283f3a71ed5be",
-    "1709ded56fa2224ac4950f9b32f11040d13be81c",
-    "1.0a",
-    "http://" + host + "/auth/github/callback",
-    "HMAC-SHA1"
-  );
-
-  oauth.getOAuthRequestToken({"scope": "gist"}, function(error, oauth_token, oauth_token_secret, results) {
-    if (error) {
-      console.log(error);
-      res.send("Authentication Failed!");
-    }
-    else {
-      req.session.oauth = {
-        token: oauth_token,
-        token_secret: oauth_token_secret
-      };
-      console.log(req.session.oauth);
-      res.redirect('https://github.com/login/oauth/authenticate?oauth_token='+oauth_token)
-    }
-  });
-
-*/
 };
 
 exports.gitCallback = function(req, res, next) {
   var code = req.query.code
     , data = {
-        "client_id": "3932296283f3a71ed5be",
-        "client_secret": "1709ded56fa2224ac4950f9b32f11040d13be81c",
+        "client_id": config.github_client_id,
+        "client_secret": config.github_client_secret,
       }
     , qs = require('querystring')
     , request = require('request');
@@ -125,8 +99,8 @@ exports.twitter = function(req, res) {
   oauth = new OAuth(
     "https://api.twitter.com/oauth/request_token",
     "https://api.twitter.com/oauth/access_token",
-    "3H9mJB3pfIgrnu4v6WKWg",
-    "CkGwsgEkZSYxkhGSPue1augSGlArxl97fa5D7LxcYTU",
+    config.twitter_client_id,
+    config.twitter_client_secret,
     "1.0a",
     "http://" + host + "/auth/twitter/callback",
     "HMAC-SHA1"
