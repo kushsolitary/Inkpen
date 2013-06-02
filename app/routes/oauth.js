@@ -54,19 +54,19 @@ exports.gitCallback = function(req, res, next) {
 
             // Put things in db
             db = createConnection();
-            db.execute("SELECT id FROM users WHERE username = ?", [req.session.username]).on('end', function(r) {
+            db.execute("SELECT id FROM users WHERE username = ? AND type = ?", [req.session.username, "github"]).on('end', function(r) {
               var exists = (r.result.rows.length == 0) ? false : true;
 
               if(exists) {
                 db = createConnection();
 
                 // Update full name and profile image
-                db.execute("UPDATE users SET fullname = ?, profile_image = ? WHERE username = ?", 
-                  [req.session.fullname, req.session.profile_image, req.session.username]
+                db.execute("UPDATE users SET fullname = ?, profile_image = ? WHERE username = ? AND type = ?", 
+                  [req.session.fullname, req.session.profile_image, req.session.username, 'github']
                 ).on('end', function(r) {
                   // And get the user data from DB
-                  db.execute("SELECT profile_image, fullname FROM users WHERE username = ?", 
-                    [req.session.username]
+                  db.execute("SELECT profile_image, fullname FROM users WHERE username = ? AND type = ?", 
+                    [req.session.username, "github"]
                   ).on('end', function(r) {
                     req.session.profile_image = r.result.rows[0][0];
                     req.session.fullname = r.result.rows[0][1];
@@ -79,8 +79,8 @@ exports.gitCallback = function(req, res, next) {
               // Else create a new user and redirect to home page
               else {
                 db = createConnection();
-                db.execute("INSERT INTO users (username, created_at, is_pro, fullname, profile_image) VALUES (?, ?, ?, ?, ?)", 
-                  [req.session.username, new Date().toMysqlFormat(), "no", req.session.fullname, req.session.profile_image]
+                db.execute("INSERT INTO users (username, created_at, is_pro, fullname, profile_image, type) VALUES (?, ?, ?, ?, ?, ?)", 
+                  [req.session.username, new Date().toMysqlFormat(), "no", req.session.fullname, req.session.profile_image, 'github']
                 ).on('end', function(r) {
                   res.redirect('/');
                 });
@@ -141,13 +141,13 @@ exports.twitCallback = function(req, res, next) {
           req.session.oauth.access_token = oauth_access_token;
           req.session.oauth.access_token_secret = oauth_access_token_secret;
           req.session.username = results.screen_name;
-          req.session.authType = 'twiter';
+          req.session.authType = 'twitter';
           // console.log(results, req.session.oauth);
 
           // Save in DB
           db = createConnection();
 
-          db.execute("SELECT id FROM users WHERE username = ?", [req.session.username]).on('end', function(r) {
+          db.execute("SELECT id FROM users WHERE username = ? AND type = ?", [req.session.username, 'twitter']).on('end', function(r) {
             var exists = (r.result.rows.length == 0) ? false : true;
 
             oauth.get( 
@@ -165,12 +165,12 @@ exports.twitCallback = function(req, res, next) {
                   db = createConnection();
 
                   // Update full name and profile image
-                  db.execute("UPDATE users SET fullname = ?, profile_image = ? WHERE username = ?", 
-                    [req.session.fullname, req.session.profile_image, req.session.username]
+                  db.execute("UPDATE users SET fullname = ?, profile_image = ? WHERE username = ? AND type = ?", 
+                    [req.session.fullname, req.session.profile_image, req.session.username, "twitter"]
                   ).on('end', function(r) {
                     // And get the user data from DB
-                    db.execute("SELECT profile_image, fullname FROM users WHERE username = ?", 
-                      [req.session.username]
+                    db.execute("SELECT profile_image, fullname FROM users WHERE username = ? AND type = ?", 
+                      [req.session.username, "twitter"]
                     ).on('end', function(r) {
                       req.session.profile_image = r.result.rows[0][0];
                       req.session.fullname = r.result.rows[0][1];
@@ -183,8 +183,8 @@ exports.twitCallback = function(req, res, next) {
                 // Else create a new user and redirect to home page
                 else {
                   db = createConnection();
-                  db.execute("INSERT INTO users (username, created_at, is_pro, fullname, profile_image) VALUES (?, ?, ?, ?, ?)", 
-                    [req.session.username, new Date().toMysqlFormat(), "no", req.session.fullname, req.session.profile_image]
+                  db.execute("INSERT INTO users (username, created_at, is_pro, fullname, profile_image, type) VALUES (?, ?, ?, ?, ?, ?)", 
+                    [req.session.username, new Date().toMysqlFormat(), "no", req.session.fullname, req.session.profile_image, "twitter"]
                   ).on('end', function(r) {
                     res.redirect('/');
                   });

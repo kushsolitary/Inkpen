@@ -88,8 +88,8 @@ exports.edit = function(req, res) {
       // console.log(username);
 
       db = createConnection();
-      db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? ORDER BY created_at DESC", 
-        [username]
+      db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? AND user_type = ? ORDER BY created_at DESC", 
+        [username, req.session.authType]
       ).on('end', function(r) {
         r.result.rows.forEach(function(r, i) {
           // console.log(moment(r[2]).fromNow(true));
@@ -137,8 +137,8 @@ exports.save = function(req, res) {
 
       else {
         db = createConnection();
-        db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary) VALUES (?, ?, ?, ?, ?)",
-          [key, content, created_by, created_at, summary]
+        db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary, user_type) VALUES (?, ?, ?, ?, ?, ?)",
+          [key, content, created_by, created_at, summary, req.session.authType]
         )
         .on('end', function(r) {
           res.json({
@@ -210,8 +210,8 @@ exports.update = function(req, res) {
         key = generateId();
 
         db = createConnection();
-        db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary) VALUES (?, ?, ?, ?, ?)",
-          [key, content, created_by, modified_at, summary]
+        db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary, user_type) VALUES (?, ?, ?, ?, ?, ?)",
+          [key, content, created_by, modified_at, summary, req.session.authType]
         )
         .on('end', function(r) {
           res.json({
@@ -245,8 +245,8 @@ exports.remove = function(req, res) {
 
   if(curr_user != 'guest') {
     db = createConnection();
-    db.execute("SELECT * FROM writes WHERE created_by = ? AND slug = ?",
-      [curr_user, key]
+    db.execute("SELECT * FROM writes WHERE created_by = ? AND slug = ? AND user_type = ?",
+      [curr_user, key, req.session.authType]
     )
     .on('end', function(r) {
       // console.log(r.result.rows);

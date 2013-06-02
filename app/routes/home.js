@@ -10,8 +10,8 @@ exports.show = function(req, res) {
 
   // Get the writes created by the current user
   db = createConnection();
-  db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? ORDER BY created_at DESC", 
-    [username]
+  db.execute("SELECT slug, summary, created_at FROM writes WHERE created_by = ? AND user_type = ? ORDER BY created_at DESC", 
+    [username, req.session.authType]
   ).on('end', function(r) {
     r.result.rows.forEach(function(r, i) {
       // console.log(moment(r[2]).fromNow(true));

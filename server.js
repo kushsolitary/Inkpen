@@ -55,8 +55,8 @@ createConnection = function() {
 
 // Create tables
 var db = createConnection();
-db.execute("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), fullname VARCHAR(50), profile_image text, is_pro VARCHAR(10), created_at DATETIME)");
-db.execute("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, summary VARCHAR(40), created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME, modified_at DATETIME)");
+db.execute("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(20), type VARCHAR(20) default 'twitter', fullname VARCHAR(50), profile_image text, is_pro VARCHAR(10), created_at DATETIME)");
+db.execute("CREATE TABLE IF NOT EXISTS writes (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, slug VARCHAR(50), content TEXT, summary VARCHAR(40), user_type VARCHAR(20) default 'twitter', created_by VARCHAR(20), is_private VARCHAR(10), created_at DATETIME, modified_at DATETIME)");
 // db.execute("CREATE TABLE IF NOT EXISTS gists (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, url TEXT, created_by VARCHAR(20), created_at DATETIME)");
 db.close();
 
