@@ -13,13 +13,13 @@ html(lang="en")
     label.toggle(for="toggle")
 
     .settings
-      a#muteBtn(href="javascript: void(0)")
+      a#muteBtn(href="javascript: void(0)", data-hint="Sounds Toggle", class="hint--bottom hint--rounded")
         i.icon-volume-up
-      a#fsBtn(href="javascript: void(0)")
+      a#fsBtn(href="javascript: void(0)", data-hint="Fullscreen Toggle", class="hint--bottom hint--rounded")
         i.icon-fullscreen
-      a#thmBtn(href="javascript: void(0)")
+      a#thmBtn(href="javascript: void(0)", data-hint="Theme Toggle", class="hint--bottom hint--rounded")
         i.icon-adjust
-      a#gistBtn(href="javascript: void(0)")
+      a#gistBtn(href="javascript: void(0)", data-hint="Save as Gist", class="hint--bottom hint--rounded")
         i.icon-github
 
     #about
