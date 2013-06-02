@@ -311,7 +311,7 @@ $("#text").scroll(function() {
 	var pos = $(this).scrollTop();
 	// console.log(pos);
 
-	var toHide = $(".settings, .toggle, #profile");
+	var toHide = $(".settings, .toggle, #profile i, #profile img");
 	if(pos > 50)
 		toHide.css({
 			"opacity": 0,

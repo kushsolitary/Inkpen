@@ -189,12 +189,11 @@ Profile
 #profile {
 	position: absolute;
 	right: 8px; top: 8px;
-	opacity: 0.5;
 	transition: all 0.3s ease;
 }
 
 #profile img, #profile i {
-	display: block;
+	display: inline-block;
 	height: 40px;
 	width: 40px;
 	text-align: center;
@@ -204,9 +203,12 @@ Profile
 	border-radius: 3px;
 	background: #333;
 	text-decoration: none;
+	margin-left: 8px;
+	opacity: 0.5;
+	transition: all 0.3s ease;
 }
 
-#profile:hover {
+#profile img:hover, #profile i:hover {
 	opacity: 1;
 }
 
