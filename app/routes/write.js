@@ -21,6 +21,11 @@ exports.view = function(req, res) {
   var data = {};
   data.key = escapeQuotes(req.params.key);
 
+  var username = (req.session.username) ? req.session.username : 'guest'
+    , profile_image = (req.session.profile_image) ? req.session.profile_image : 'guest'
+    , fullname = (req.session.fullname) ? req.session.fullname : 'guest'
+    , token = (req.session.access_token) ? (req.session.access_token) : 'undefined';
+
   db = createConnection();
   db.execute("SELECT content, created_by FROM writes WHERE slug = ?", [data.key]).on('end', function(r) {
     if(r.result.rows.length > 0 ) {
@@ -36,12 +41,24 @@ exports.view = function(req, res) {
           data.profile_image = r.result.rows[0][0];
           data.fullname = r.result.rows[0][1];
 
-          res.render('view', {data: data});
+          res.render('view', {
+            data: data, 
+            username: username,
+            profile_image: profile_image,
+            fullname: fullname,
+            token: token
+          });
         });
       }
 
       else {
-        res.render('view', {data: data});
+        res.render('view', {
+          data: data, 
+          username: username,
+          profile_image: profile_image,
+          fullname: fullname,
+          token: token
+        });
       }
     }
     else
