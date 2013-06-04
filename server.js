@@ -38,6 +38,11 @@ app.listen(8080, function(port) {
   // console.log("Server started on localhost: 8080");
 });
 
+// --------
+// Defaults
+// --------
+
+
 
 // -----
 // Database

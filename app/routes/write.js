@@ -29,11 +29,16 @@ exports.view = function(req, res) {
   db = createConnection();
   db.execute("SELECT content, created_by, user_type FROM writes WHERE slug = ?", [data.key]).on('end', function(r) {
     if(r.result.rows.length > 0 ) {
+      console.log(r.result.rows);
+
       data.content = unescape(r.result.rows[0][0]);
       data.content = converter.makeHtml(data.content);
 
       data.created_by = r.result.rows[0][1];
-      data.user_type = r.result.rows[0][2];
+      try {
+        data.user_type = r.result.rows[0][2];
+      } catch(e) {}
+
 
       if(data.created_by !== 'guest') {
         db = createConnection();
@@ -122,6 +127,7 @@ exports.save = function(req, res) {
     , summary = escapeQuotes(req.body.summary)
     , created_at = new Date().toMysqlFormat()
     , created_by = (req.session.username) ? req.session.username : 'guest'
+    , authType = (req.session.authType) ? req.session.authType : 'twitter'
     , key;
 
   db = createConnection();
@@ -139,7 +145,7 @@ exports.save = function(req, res) {
       else {
         db = createConnection();
         db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary, user_type) VALUES (?, ?, ?, ?, ?, ?)",
-          [key, content, created_by, created_at, summary, req.session.authType]
+          [key, content, created_by, created_at, summary, authType]
         )
         .on('end', function(r) {
           res.json({
@@ -181,6 +187,7 @@ exports.update = function(req, res) {
     , summary = escapeQuotes(req.body.summary)
     , modified_at = new Date().toMysqlFormat()
     , curr_user =  (req.session.username) ? req.session.username : 'guest'
+    , authType = (req.session.authType) ? req.session.authType : 'twitter'
     , created_by;
 
   db = createConnection();
@@ -212,7 +219,7 @@ exports.update = function(req, res) {
 
         db = createConnection();
         db.execute("INSERT INTO writes (slug, content, created_by, created_at, summary, user_type) VALUES (?, ?, ?, ?, ?, ?)",
-          [key, content, created_by, modified_at, summary, req.session.authType]
+          [key, content, created_by, modified_at, summary, authType]
         )
         .on('end', function(r) {
           res.json({
