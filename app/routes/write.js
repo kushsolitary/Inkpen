@@ -6,7 +6,7 @@ var generateId = function() {
 };
 
 var escapeQuotes = function(str) {
-  return str.replace(/'/g, "").replace(/"/g, '');
+  return str.replace(/'/g, "\'").replace(/"/g, '\"');
 }
 
 var escapeHTML = function(str) {
