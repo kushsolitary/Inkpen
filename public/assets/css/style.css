@@ -218,6 +218,28 @@ Profile
 }
 
 
+/* 
+Repos
+-----
+*/
+
+#repos {
+	width: 400px;
+	height: 100%;
+	background: #0e0e0e;
+	position: absolute;
+	right: -400px;
+	top: 0;
+	transition: all .3s ease;
+
+	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
+	overflow: auto;
+
+	padding: 25px 25px 25px 75px;
+	text-shadow : 0 1px 1px black;
+}
+
+
 /*
 Preview
 -------

@@ -97,15 +97,20 @@ html(lang="en")
     p.notify
       | Saving...
       
-    section#profile
       if username != 'guest'
-        a.avatar(href="javascript:void(0);")
-          img(src="#{profile_image}", width="40")
+        section#profile
+          a.avatar(href="javascript:void(0);")
+            img(src="#{profile_image}", width="40")
+
+        div#repos 
+          
+
       else
-        a(href="/auth/twitter/")
-          i.icon-twitter
-        a(href="/auth/github/")
-          i.icon-github
+        section#profile
+          a(href="/auth/twitter/")
+            i.icon-twitter
+          a(href="/auth/github/")
+            i.icon-github
 
     // Heart
     section#write

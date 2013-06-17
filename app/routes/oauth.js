@@ -5,7 +5,7 @@ var OAuth = require('oauth').OAuth
 // Github oAuth controller
 exports.github = function(req, res) {
   var host = req.headers.host
-    , url = "https://github.com/login/oauth/authorize/?client_id=" + config.github_client_id + "&scope=gist";
+    , url = "https://github.com/login/oauth/authorize/?client_id=" + config.github_client_id + "&scope=gist,repo";
 
   res.redirect(url);
 
@@ -27,7 +27,7 @@ exports.gitCallback = function(req, res, next) {
     "https://github.com/login/oauth/access_token?client_id=" + data.client_id + "&client_secret="+data.client_secret+"&code="+code ,
     function(e, r, body) {
       if (e) {
-        console.log(error);
+        console.log(e);
         res.send("Authentication Failure!");
       }
       else{
@@ -45,6 +45,23 @@ exports.gitCallback = function(req, res, next) {
             }
           },
           function (error, response, body) {
+            var url = "https://api.github.com/user/repos?access_token=" + req.session.access_token;
+            request({
+                method: 'GET', 
+                uri: url,
+                headers: {
+                  'user-agent': "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)"
+                }
+              },
+              function (er, re, bo) {
+                var data = JSON.parse(bo);
+
+                data.forEach(function(d, i) {
+                  
+                });
+              }
+            );
+
             // Let's save the data
             body = JSON.parse(body);
             req.session.profile_image = body.avatar_url;
@@ -88,6 +105,7 @@ exports.gitCallback = function(req, res, next) {
             });
           }
         );
+
       }
     }
   );
