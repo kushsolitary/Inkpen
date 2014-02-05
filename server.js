@@ -34,7 +34,7 @@ app.use(function(err, req, res, next) {
 });
 
 // Launch Main App
-app.listen(8080, function(port) {
+app.listen(3000, function(port) {
   // console.log("Server started on localhost: 8080");
 });
 
@@ -48,12 +48,13 @@ app.listen(8080, function(port) {
 // Database
 // -----
 
+// MySQL config
 var mysql = require("mysql-native");
 createConnection = function() {
   var db = mysql.createTCPClient();
   db.set('auto_prepare', true)
     .set('row_as_hash', false)
-    .auth('inkpen', 'root', '');
+    .auth('inkpen', 'admin', 'admin');
 
   return db;
 }
