@@ -23,7 +23,7 @@ Install dependencies via `package.json`.
 $ npm install
 ```
 
-Change the details in config.js
+Rename config_sample.js to config.js and fill in your details.
 
 ```js
 //Add your twitter and github client ids here...
