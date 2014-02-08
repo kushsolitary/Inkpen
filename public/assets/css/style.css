@@ -381,7 +381,6 @@ About
 }
 
 #about ul.writes li a{
-	display: inline-block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
