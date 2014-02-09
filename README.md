@@ -9,8 +9,9 @@ Features
 - Markdown support (Press Ctrl+M or ⌘+M) for preview.
 - Dark/Light theme switching.
 - Fullscreen support.
-- Twitter auth for saving the writeups under your username (for later access). You can use Ctrl+S or ⌘+S to save/update your writeup on the server.
-- Saving of writeups locally.
+- Twitter and github auth for saving the writeups under your username (for later access). You can use Ctrl+S or ⌘+S to save/update your writeup on the server. 
+- Save as gists (can be saved under your account if you are authorised using Github).
+- Saving of writeups locally and on server.
 
 Setup
 -----
@@ -50,7 +51,7 @@ http://localhost:8080
 Credits
 -------
 
-- [Kushagra](http://twitter.com/solitarydesigns)
+- [Kushagra](http://twitter.com/kushsolitary)
 - [Rishabh](http://twitter.com/_rishabhp)
 
 
