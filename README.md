@@ -52,3 +52,7 @@ Credits
 
 - [Kushagra](http://twitter.com/solitarydesigns)
 - [Rishabh](http://twitter.com/_rishabhp)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kushsolitary/inkpen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
